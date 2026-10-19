@@ -1,2 +1,13 @@
 # aiNutri
-Controle de calorias ingeridas com base em fotos e relatos, seguindo plano nutricional ou dieta. (Plugin)
+IA que ajuda você a seguir sua dieta, registrar refeições, controlar calorias e acompanhar seus objetivos!
+
+Em construção
+
+## Como instalar e usar
+(download)
+
+### Instalar no ChatGPT
+...
+
+### Instalar no Claude
+...

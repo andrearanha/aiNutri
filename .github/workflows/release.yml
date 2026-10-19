@@ -1,0 +1,28 @@
+name: Release Plugin
+
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Gerar ZIP
+        run: |
+          mkdir -p dist
+          cd src
+          zip -r ../dist/aiNutri.zip .
+
+      - name: Publicar Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            dist/aiNutri.zip \
+            --generate-notes

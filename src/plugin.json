@@ -1,0 +1,35 @@
+
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ainutri",
+  "version": "0.1.0",
+  "description": "IA que ajuda você a seguir sua dieta, registrar refeições, controlar calorias e nutrientes e acompanhar sua evolução.",
+  "keywords": [
+    "nutrition",
+    "food",
+    "health",
+    "fitness",
+    "meal-tracking"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "aiNutri",
+        "shortDescription": "Sua dieta sob controle, com ajuda da IA.",
+        "longDescription": "Seguir uma dieta fica mais fácil com o aiNutri. Registre o que come em uma conversa natural, acompanhe calorias e nutrientes, receba análises das suas refeições e monitore sua evolução ao longo do tempo. Um assistente pessoal para manter o foco nas metas alimentares e tomar decisões melhores todos os dias.",
+        "defaultPrompt": [
+          "Quero configurar meu acompanhamento alimentar.",
+          "Vou te contar o que comi hoje.",
+          "Analise meu histórico alimentar."
+        ],
+        "capabilities": [
+          "Registro de refeições",
+          "Análise nutricional",
+          "Acompanhamento histórico",
+          "Orientações alimentares"
+        ]
+      },
+      "onboardingSkill": "./skills/onboarding/SKILL.md"
+    }
+  }
+}
