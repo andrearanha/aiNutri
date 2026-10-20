@@ -1,4 +1,3 @@
-
 ---
 name: onboarding
 description: >-
@@ -19,6 +18,11 @@ Preparar o aiNutri para acompanhar individualmente o usuário,
 com uma experiência simples, conversacional e sem exigência
 de conhecimentos técnicos.
 
+Esta skill é interna: o Core conduz todas as perguntas e respostas com o usuário,
+aplicando as etapas abaixo, sem pedir invocação de skills pelo nome. As operações
+de criação e gravação autorizadas são encaminhadas pelo Core à
+[data-writer](../data-writer/SKILL.md), que adapta os dados e devolve a confirmação.
+
 Ao final, o usuário deverá ter:
 - Sua conta Google Drive conectada.
 - Uma pasta de trabalho definida e acessível.
@@ -36,6 +40,20 @@ Ao final, o usuário deverá ter:
 - Não repetir perguntas cujas respostas já estejam disponíveis.
 - Adaptar a conversa ao nível de conhecimento do usuário.
 - Retomar configurações interrompidas sem duplicar dados.
+
+## Contexto temporal
+
+Sempre considere o timestamp de envio da mensagem do usuário. Antes de
+interpretar datas ou horários, leia e aplique a [regra de contexto temporal compartilhado](../../references/temporal-context.md).
+
+- Reutilize o fuso e a rotina já conhecidos. Se o fuso necessário não estiver
+  disponível, peça essa referência de forma simples quando ela fizer diferença
+  para o acompanhamento; não presuma um fuso pelo idioma nem exija cadastro técnico.
+- Encaminhe pelo Core à data-writer o fuso confirmado e o contexto temporal
+  pertinente aos dados autorizados, sem criar campos de horário fictícios.
+- Preserve datas e vigências de planos, exames e medições fornecidos. O
+  timestamp da mensagem que envia um documento não substitui a data do exame,
+  da medição ou do início de vigência do plano.
 
 ## Etapa 1 — Boas-vindas
 
@@ -80,14 +98,16 @@ Nome padrão sugerido: aiNutri
 Organização inicial sugerida:
 
 aiNutri/
-  .ainutri
-  perfil.md
-  alimentos/
-  exames/
-  diario/
+  .ainutri # arquivo vazio para identificar que se trata de um diretório do aiNutri
+  profile.md # dados do usuário com informações de objetivos, rotina, restrições alimentares, etc
+  food-registry.gsheet # meal-registry: cadastro reutilizável de alimentos, produtos e receitas conhecidos, com nomes únicos
+  clinical/ # diretório com exames laboratoriais, receitas de remédios, dietas e plano alimentar  fornecidos pelo usuário
+  meal-log.gsheet # Principal persistência: planilha com registro de refeições, horários, Kcalorias, macronutrientes, descrição inferida do prato, e informações relevantes do contexto
 
-Os registros de refeições serão organizados posteriormente
-conforme o modelo de persistência definido pelo projeto.
+O cadastro de alimentos conhecidos segue as [regras de meal-registry](../../references/meal-registry.md).
+Ele é alimentado durante o uso autorizado, sem exigir um catálogo completo no
+onboarding. Não preencher exemplos ou uma base inicial fictícia; o modelo do
+arquivo e a eventual distribuição de uma base nutricional serão definidos depois.
 
 ## Etapa 4 — Perfil e objetivos
 
@@ -147,7 +167,7 @@ Não exigir exames para utilizar o aiNutri.
 Antes de gravar, apresentar resumidamente as informações
 que serão armazenadas e solicitar confirmação.
 
-Utilizar as ferramentas autorizadas para:
+O Core deve acionar data-writer com os dados, destinos e autorizações para:
 - Registrar ou atualizar o perfil.
 - Registrar o plano nutricional, quando existente.
 - Organizar os exames fornecidos e autorizados.
