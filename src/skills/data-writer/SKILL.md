@@ -32,7 +32,7 @@ Receber no formato suportado pela plataforma, sem exigir JSON ou código:
   ou atualização autorizada de perfil, cadastro ou documento.
 - Pasta e conta selecionadas, destinos conhecidos por ID/URL e autorização
   aplicável. Para criação inicial, receber o local autorizado pelo onboarding.
-- Dados a gravar: refeição, data do consumo, horário quando conhecido, itens,
+- Dados a gravar: refeição, data do consumo, horário por consumo ou pendência após pergunta, itens,
   porções, kcal e demais informações pertinentes já fornecidas pela análise
   ou pela Core. Incluir origem, hipóteses e pendências disponíveis.
 - Contexto temporal: timestamp de envio da mensagem original, fuso/offset
@@ -52,10 +52,8 @@ continuam sujeitos ao onboarding e às regras da plataforma.
 Sempre considere o timestamp de envio da mensagem do usuário. Antes de gravar
 datas ou horários, leia e aplique a [regra de contexto temporal compartilhado](../../references/temporal-context.md).
 
-- Preserve separadamente o timestamp da mensagem, o momento do consumo e o
-  momento da gravação/atualização, quando disponíveis. Mapeie-os aos campos
-  existentes ou acrescente campos/observações pertinentes conforme as regras
-  de adaptação abaixo, sem impor um modelo completo de persistência.
+- Persista o momento do consumo e sua precisão; timestamps de envio e de
+  gravação não são necessários. Use metadados temporais apenas para resolução.
 - Grave o consumo na data resolvida pela Core; não use o horário da ferramenta
   ou da tentativa de escrita para preencher ou substituir o horário do consumo.
   Preserve aproximações, fuso/offset e pendências sem inventar precisão.
@@ -104,43 +102,33 @@ solicitada e do consumo; repetir a operação não cria outra versão.
 
 ## Adaptação às planilhas
 
-O modelo é extensível. A base acompanha o conteúdo das saídas de
-[meal-analyzer](../meal-analyzer/SKILL.md) e da Core, sem fixar nomes exatos,
-ordem das colunas, número de abas ou um modelo completo de arquivo nesta skill.
+O [modelo do diário](references/meal-log-model.md) define as abas, os campos,
+as relações e a estrutura vazia inicial. Para nova planilha autorizada, crie um
+recurso nativo com as ferramentas disponíveis, suas abas e cabeçalhos vazios;
+confira a criação e os cabeçalhos. `meal-log.gsheet` é nome lógico, não um arquivo
+local a enviar. Sem capacidade de criar ou editar abas e células, informe a
+limitação; não alegue que o diário está pronto.
 
-| Conteúdo básico do registro alimentar | Como preservar |
-| --- | --- |
-| Data do consumo e refeição | Associar ao dia e à refeição corretos; guardar horário quando conhecido, sem inventar precisão. |
-| Alimento ou descrição e porção | Manter a composição disponível e a quantidade considerada, distinguindo porção informada de estimada. |
-| Calorias em kcal | Guardar o valor analisado, sua faixa ou a indicação de que ainda não foi estimado. |
+Em planilhas existentes, inspecione abas, cabeçalhos, unidades, granularidade,
+fórmulas e registros pertinentes antes de adaptar. Mapeie equivalentes pelo
+significado e unidade: `Data` pode ser data do consumo; `Refeição`, nome da
+refeição; `Descrição`, alimento; `Porção`, quantidade com unidade explícita;
+`Calorias`, `kcal` ou `Energia (kcal)`, energia em kcal. Um total por refeição
+não é valor de item; kcal e kJ não são equivalentes sem conversão fundamentada.
+A coluna de nota legada só representa conceito ou farol se seu significado for
+inequívoco; pontuação numérica não é conceito. Não crie duplicata semântica.
 
-- Mapear cabeçalhos equivalentes antes de criar colunas: `Calorias`, `kcal` e
-  `Energia (kcal)` podem representar o mesmo campo. Conferir também a unidade;
-  kcal e kJ não são equivalentes sem conversão. Não criar duas colunas para o
-  mesmo significado nem converter unidades por suposição.
-- Manter a granularidade encontrada, por item ou por refeição, preservando os
-  componentes em campos ou abas apropriados. Não gravar só o total se isso
-  perder a descrição e as porções analisadas. Não somar linhas de subtotal como
-  novos consumos nem duplicar a refeição ao persistir seus componentes.
-- Acrescentar colunas quando necessárias para representar dados disponíveis
-  e relevantes ao usuário: proteínas, fibras, sódio, fonte, observações ou uma
-  pendência, por exemplo. Reutilizar uma coluna existente com o mesmo significado.
-  Essa extensão faz parte da gravação cotidiana autorizada, sem confirmação
-  separada por coluna, desde que não mude o significado dos dados anteriores.
-- Nutrientes adicionais não são obrigatórios em toda planilha. Não impor
-  proteínas como coluna padrão nem criar uma coluna para cada detalhe de uma
-  conversa. Preservar as colunas personalizadas existentes, mesmo sem valor novo.
-- Avaliação, total da refeição, consumo diário, meta e saldo são dados do
-  escopo correspondente. Gravá-los quando fornecidos e pertinentes ao destino;
-  não repetir um saldo diário como se fosse atributo nutricional de cada alimento.
-  Se forem armazenados, manter sua relação com o dia ou a refeição e as pendências.
-- Preservar ordem, conteúdo, fórmulas e formatação existentes. Adicionar campos
-  sem sobrescrever células ocupadas, deslocar dados ou quebrar fórmulas e tabelas.
-  Se uma adaptação exigir migração destrutiva ou mudar o significado de uma
-  coluna, devolver a decisão à Core antes de executá-la.
-- Se a criação de uma planilha estiver autorizada e não houver modelo definido,
-  iniciar com o conteúdo básico acima e os campos adicionais necessários ao
-  contexto atual. Não preencher registros de exemplo nem criar histórico fictício.
+Preserve dados, fórmulas, formatação e colunas personalizadas. Acrescente campos
+ou abas livres necessários para representar o modelo e vínculos, sem deslocar ou
+sobrescrever conteúdo, alterar significado ou quebrar fórmulas. Identidades
+estáveis devem ser persistidas: atribua IDs únicos aos registros legados apenas
+quando o mapeamento e a escrita forem seguros; número de linha isolado não é ID.
+Preserve a granularidade legada e relacione itens, notas e totais sem duplicar
+consumos; não invente divisão de valores agregados. Se não houver capacidade,
+espaço ou correspondência inequívoca, não migre nem substitua dados: mantenha a
+estrutura original, informe ao Core o bloqueio e as alternativas verificáveis.
+Execute somente operações independentes e seguras. Não crie outro diário para
+contornar a limitação sem escolha explícita do usuário.
 
 Manter valores numéricos utilizáveis para cálculos, com unidades explícitas no
 cabeçalho ou na estrutura existente. Preservar o caráter estimado, as faixas,
@@ -160,9 +148,10 @@ contidas nos relatos ou nos documentos.
    o conflito à Core; não sobrescrever uma versão mais recente silenciosamente.
 2. **Preparar a alteração mínima.** Mapear os dados aos campos existentes e
    acrescentar apenas as colunas necessárias. Não substituir a planilha inteira
-   ou limpar um intervalo para corrigir um lançamento. Não exigir coluna nova
-   de identificador quando a estrutura já permitir localizar o registro com segurança.
-3. **Executar a operação autorizada.** Um novo consumo gera um novo registro;
+   ou limpar um intervalo para corrigir um lançamento. Persistir identificadores estáveis conforme o modelo, inclusive para operações retomáveis.
+3. **Proteger resumos e executar.** Antes de qualquer novo consumo, complemento,
+   correção ou conclusão que afete resumos existentes, confirme a marcação
+   desatualizada dos resumos afetados, conforme abaixo. Um novo consumo gera um novo registro;
    um complemento acrescenta somente os novos itens à refeição identificada;
    uma correção substitui os dados afetados. Completar um nutriente pendente
    atualiza o consumo existente. Nunca relançar a refeição inteira por padrão.
@@ -182,9 +171,12 @@ nesse caso, confirmar o estado existente sem gravar novamente.
 
 Após correções, preservar fórmulas que recalculam totais. Atualizar resumos
 armazenados com os valores conferidos pela Core, sem refazer análise nutricional
-ou avaliação. Se faltar um total ou farol atualizado, informar a pendência à
-Core e identificar o resumo afetado como desatualizado no campo ou observação
-adequado. Não apresentar o resumo anterior como se refletisse a correção.
+ou avaliação. Antes de alterar consumo, marque notas e totais persistidos afetados como
+desatualizados; confirme essa marcação antes da alteração. Inclua refeição e
+os dias original e novo quando a data mudar. Se não puder marcar com segurança,
+não altere o consumo enquanto existirem resumos que pareceriam atuais. Depois
+da alteração confirmada, atualize apenas resumos calculados sobre o estado
+confirmado; caso falhem, mantenha a marcação e informe a pendência. Não apresentar o resumo anterior como se refletisse a correção.
 
 ### Falhas e resultado incerto
 
@@ -218,7 +210,9 @@ A Core usa esse retorno para apresentar uma única resposta e distinguir os
 totais persistidos dos valores ainda considerados apenas na conversa.
 Uma pendência nutricional registrada como tal não é falha de escrita: separar
 dados ainda desconhecidos de alterações que não puderam ser gravadas.
-Não afirmar persistência entre chats nem agendar nova tentativa sem suporte real.
+A recuperação entre chats depende de IDs e dados efetivamente persistidos e de
+acesso de leitura; não prometa recuperação de uma escrita incerta. Não agende
+nova tentativa sem suporte real.
 
 Para revisar adaptação, correções e falhas, consultar os
 [exemplos de gravação](references/examples.md). Todos os dados são fictícios.

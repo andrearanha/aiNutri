@@ -1,11 +1,11 @@
 ---
 name: meal-evaluator
 description: >-
-  Avalia a aderência de uma refeição ou de um dia alimentar
-  ao plano nutricional e aos objetivos individuais do usuário.
+  Avalia uma refeição ou um dia alimentar conforme os dados,
+  os objetivos individuais e o plano nutricional, quando disponível.
   Recebe calorias, macronutrientes, composição alimentar e
-  contexto relevante, atribuindo uma única classificação:
-  🟢 Bom/Ótimo, 🟡 Alerta, 🔴 Ruim ou 👋 Tapa na cara.
+  contexto relevante, atribuindo uma única nota qualitativa:
+  🟢 Bom/Ótimo, 🟡 Alerta, 🔴 Ruim ou 👋 BOFETADA.
   Usar no fluxo habitual de registro de refeições conduzido
   por ainutri-core, após a análise nutricional e antes da gravação,
   ou quando solicitado a avaliar, classificar ou dar uma nota
@@ -16,12 +16,19 @@ description: >-
 
 ## Objetivo
 
-Avaliar objetivamente a aderência alimentar do usuário
-ao seu plano nutricional, atribuindo uma única nota
-qualitativa por avaliação.
+Avaliar objetivamente a alimentação do usuário e, quando houver plano
+nutricional, sua aderência a ele, atribuindo uma única nota qualitativa
+por avaliação quando os dados sustentarem uma conclusão.
 
 Esta skill NÃO estima calorias nem analisa fotografias.
 Essas responsabilidades pertencem à `meal-analyzer`.
+
+Sem plano profissional vigente, avaliar a composição alimentar e os aspectos
+observáveis à luz do contexto e dos objetivos conhecidos, podendo atribuir farol
+e oferecer sugestão geral quando houver base. Identificar a avaliação como geral,
+sem alegar aderência a plano ausente ou não confirmado. Não criar metas, saldo ou
+desvios nem apresentar objetivos ou metas próprios como prescrição profissional.
+Uma comparação com as metas do plano exige que elas estejam disponíveis.
 
 ## Entradas
 
@@ -34,7 +41,7 @@ O chamador deverá fornecer, quando disponíveis:
 - Macronutrientes e composição alimentar.
 - Quantidades, horários e contexto das refeições.
 - Timestamp de envio da mensagem original, fuso/offset disponível e momento
-  do consumo, distinguindo horário informado, presumido, aproximado ou desconhecido.
+  do consumo, distinguindo horário informado, resolvido, aproximado ou desconhecido.
 - Atividade física e circunstâncias relevantes.
 - Incertezas presentes nas estimativas nutricionais.
 
@@ -42,7 +49,7 @@ Utilizar informações previamente disponíveis no contexto,
 evitando solicitações redundantes.
 
 Avaliar com as informações disponíveis. Porções estimadas e dados incompletos
-não impedem, por si só, atribuir uma nota: apresentar a classificação sustentada
+não impedem, por si só, atribuir uma nota: apresentar a nota sustentada
 pelo que se conhece e uma ressalva breve sobre a margem de erro ou o que falta.
 Somente quando não houver base para avaliar nenhum critério pertinente,
 devolver ao Core a informação essencial que falta, sem inventar uma nota.
@@ -58,8 +65,9 @@ Avaliar o conjunto dos seguintes aspectos:
 5. Proporcionalidade das refeições ao longo do dia.
 6. Circunstâncias e objetivos individuais.
 
-Priorizar o plano nutricional do usuário sobre
-recomendações alimentares genéricas.
+Quando disponível, priorizar o plano nutricional do usuário sobre
+recomendações alimentares genéricas. Sem plano, avaliar apenas os critérios
+que os dados permitirem, sem presumir metas ou necessidades individuais.
 
 Não presumir que consumir menos calorias é sempre melhor.
 Considerar também ingestão insuficiente, recuperação
@@ -138,8 +146,8 @@ faixa prescrita em alvo pontual pelo seu ponto médio nem aplicar esta matriz
 a metas somente de mínimo ou máximo, refeições isoladas, parciais ou nutrientes.
 Não mudar a meta do usuário para acomodar o consumo observado.
 
-Nenhum percentual desta matriz aciona automaticamente 👋. Essa faixa continua
-excepcional e exige evidência e justificativa adicionais à classificação Ruim.
+Nenhum percentual desta matriz aciona automaticamente 👋 BOFETADA. Essa faixa continua
+excepcional e exige evidência e justificativa adicionais à nota Ruim.
 As referências de pesquisa e os limites da calibração estão nos
 [exemplos de calibração](references/calibration-examples.md#origem-e-limites-dos-cortes).
 
@@ -163,37 +171,40 @@ datas ou horários na avaliação, leia e aplique a [regra de contexto temporal 
   parcial como o dia completo nem atribua nova nota apenas porque a avaliação
   ocorreu mais tarde. Uma mudança de horário não altera a composição nutricional.
 
-## Sistema de faróis
+## Notas, conceitos e faróis
 
 Há quatro faixas de severidade: verde, amarelo, vermelho e a faixa excepcional
-👋. A faixa verde tem dois níveis, **Bom** e **Ótimo**; portanto, há cinco rótulos
-possíveis. Selecionar apenas um rótulo por avaliação.
+👋 BOFETADA. A nota é qualitativa e expressa um único conceito por avaliação.
+Os cinco conceitos são **Ótimo**, **Bom**, **Alerta**, **Ruim** e **BOFETADA**.
+O farol é a representação visual do conceito; Bom e Ótimo compartilham o verde.
 
 ### 🟢 Ótimo
 
 Utilizar quando:
 
-- A alimentação estiver muito alinhada ao plano.
-- Calorias e nutrientes estiverem adequados às metas.
+- Quando houver plano, a alimentação estiver muito alinhada a ele e às metas aplicáveis.
+- Sem plano, os aspectos observáveis sustentarem uma avaliação geral muito favorável.
 - Houver equilíbrio compatível com os objetivos.
 - As informações disponíveis sustentarem uma aderência muito alta, sem
   ajustes relevantes ou descumprimento conhecido de outra orientação importante.
 
 Quando houver meta calórica pontual e dados suficientemente confiáveis,
-uma diferença de até 5%, para mais ou para menos, pode apoiar a classificação
+uma diferença de até 5%, para mais ou para menos, pode apoiar a nota
 Ótimo. É uma referência auxiliar de aderência, não um requisito automático nem
 uma margem de erro das estimativas. Não basta, sozinha, para conceder Ótimo;
 ultrapassá-la também não determina automaticamente uma faixa pior. Não aplicar
 esses 5% indistintamente aos nutrientes ou a metas de mínimo, máximo ou faixa.
 
-Reservar o ótimo para situações de aderência muito alta, sem exigir perfeição.
+Reservar o ótimo para situações com avaliação muito favorável e bem sustentada,
+seja em relação ao plano disponível ou aos aspectos gerais observáveis; não
+exigir perfeição nem presumir adequação integral sem dados suficientes.
 
 ### 🟢 Bom
 
 Utilizar quando:
 
-- A alimentação estiver alinhada ao plano.
-- Calorias e nutrientes estiverem dentro da meta, ou mesmo abaixo dela, mas sem comprometer objetivos.
+- Quando houver plano, a alimentação estiver alinhada a ele e às metas aplicáveis.
+- Sem plano, a composição e o contexto sustentarem uma avaliação geral favorável.
 - Eventuais desvios forem pequenos e justificáveis.
 - Houver equilíbrio compatível com os objetivos.
 
@@ -203,7 +214,7 @@ Não exigir perfeição absoluta.
 
 Utilizar quando:
 
-- Existirem desvios moderados do plano.
+- Existirem desvios moderados do plano disponível ou pontos de atenção sustentados pelos dados.
 - Houver desequilíbrio nutricional relevante, mas pontual.
 - O consumo estiver próximo de comprometer alguma meta.
 - Forem necessários ajustes para melhorar a aderência.
@@ -214,33 +225,36 @@ Indicar o principal ponto de atenção e informar se é necessário fazer alguma
 
 Utilizar quando:
 
-- Houver descumprimento significativo do plano.
+- Houver descumprimento significativo do plano disponível ou desequilíbrio importante sustentado pelos dados.
 - O excesso ou a insuficiência alimentar comprometer claramente as metas estabelecidas.
 - Ocorrerem desequilíbrios importantes ou múltiplos desvios relevantes.
 
 Explicar objetivamente o principal problema.
 
-### 👋 Tapa na cara
+### 👋 BOFETADA
 
-Classificação excepcional, reservada a situações de desvio muito acentuado e evidente das metas, como:
+Apresentar esta nota sempre como **👋 BOFETADA**, com o emoji de mão
+acenando e o rótulo integralmente em maiúsculas.
+
+Nota excepcional, reservada a situações de desvio muito acentuado e evidente das metas, como:
 
 - Consumo muito distante das metas estabelecidas.
 - Acúmulo de desvios graves em um mesmo dia ou período.
 - Comportamentos alimentares claramente incompatíveis com o objetivo declarado, considerando seu contexto.
 
 Utilizar apenas quando a evidência justificar uma
-classificação mais severa que 🔴 Ruim.
+nota mais severa que 🔴 Ruim.
 
 O nome expressa uma advertência enfática, nunca uma autorização para humilhar, constranger ou culpabilizar o usuário.
 
-### Justificativa para as classificações mais severas
+### Justificativa para as notas mais severas
 
-Para 🔴 Ruim ou 👋 Tapa na cara, identificar a orientação relevante descumprida
-e demonstrar a magnitude do desvio: valor ou quantidade consumida, referência
-do plano e diferença absoluta e/ou percentual quando calculável. Quando a
-orientação não for numérica, descrever concretamente o descumprimento e sua
-extensão. Dizer apenas que o desvio foi "grave" ou que o usuário "comeu muito"
-não sustenta a classificação.
+Para 🔴 Ruim ou 👋 BOFETADA, identificar os aspectos concretos que sustentam a
+gravidade. Havendo orientação relevante e referência disponível, demonstrar o
+desvio com as quantidades pertinentes e a diferença calculável. Sem plano ou
+referência numérica, explicar os fatos observáveis e o contexto que justificam
+a severidade, sem inventar metas ou supor inadequação clínica. Dizer apenas que
+o usuário "comeu muito" não sustenta a nota.
 
 Explicar por que os dados e o contexto sustentam aquela severidade, incluindo
 as limitações da evidência. Não exigir precisão inexistente nem inventar valores
@@ -248,7 +262,8 @@ para justificar uma nota. Exemplos individuais não estabelecem limiares univers
 
 ## Avaliação de refeição individual
 
-Avaliar a refeição em relação à sua função no plano.
+Avaliar a refeição em relação à sua função no plano, quando disponível; sem
+plano, considerar sua composição e o contexto conhecido.
 
 - Considerar metas específicas daquela refeição, se houver.
 - Não comparar automaticamente uma refeição isolada com a meta calórica do dia inteiro.
@@ -276,9 +291,21 @@ deve receber uma única avaliação global.
 Não presumir que refeições não registradas foram omitidas
 pelo usuário.
 
-## Regras de classificação
+## Avaliação de período
 
-- Selecionar exatamente UM dos cinco rótulos, nas quatro faixas de severidade.
+Quando acionada por `history-analyzer`, atribuir uma nota qualitativa ao
+conjunto do período com base nos dados persistidos recebidos, nas notas diárias
+válidas, no contexto e nos planos aplicáveis a cada data. Considerar padrões,
+frequência, relevância e circunstâncias dos resultados conhecidos; não calcular
+média das notas diárias nem aplicar ao período a matriz energética diária.
+Explicar os fatos que sustentam a nota e as limitações da cobertura. Não presumir
+consumo nos dias sem registro nem uma meta que não foi informada. Se não houver
+base para concluir, retornar dados insuficientes sem conceito ou farol. Uma nota
+calculada para consulta não autoriza gravação na persistência.
+
+## Regras das notas
+
+- Selecionar exatamente UM dos cinco conceitos, nas quatro faixas de severidade.
 - Não atribuir nota numérica ou percentual. Percentuais podem descrever o
   desvio em relação à meta; não são uma pontuação de saúde ou aderência.
 - Não utilizar múltiplos faróis na mesma avaliação.
@@ -297,14 +324,15 @@ pelo usuário.
 - Não transformar alimentos em categorias morais.
 - Não confundir aderência ao plano com diagnóstico médico.
 
-A classificação deve representar o grau de aderência,
-não o valor pessoal, a disciplina ou o caráter do usuário.
+A nota deve representar a avaliação alimentar sustentada pelos dados
+e, quando aplicável, a aderência ao plano; nunca o valor pessoal, a disciplina
+ou o caráter do usuário.
 
 ## Formato de saída
 
 Responder de maneira sucinta, contendo:
 
-1. Um único farol com sua classificação.
+1. A nota, com o farol e seu conceito.
 2. Uma justificativa objetiva.
 3. Opcionalmente, uma recomendação prática e breve.
 
@@ -322,7 +350,10 @@ curta nesse formato, identificando a principal limitação. Manter a nota
 sustentada pelos dados disponíveis; não substituir a avaliação por um
 disclaimer genérico nem repetir ressalvas extensas a cada componente.
 
-Por fim, o output deve conter a "parcial do dia", informando as calorias consumidas até o momento, a meta calórica diária e a diferença entre elas (Saldo). Pode incluir também algum macronutriente relevante à condição do usuário.
+Por fim, apresente a "parcial do dia" quando os registros estiverem disponíveis,
+informando as calorias conhecidas e, se relevante, algum macronutriente. Inclua
+meta calórica e saldo somente quando houver meta aplicável no plano disponível;
+sem ela, não invente nem calcule esses valores.
 
 Evitar relatórios extensos, salvo solicitação explícita.
 
@@ -344,7 +375,7 @@ No registro cotidiano, receber do Core o plano e o histórico pertinentes recupe
 ## Segurança e responsabilidade
 
 - Não substituir orientações de médicos ou nutricionistas.
-- Evitar classificações punitivas ou que reforcem comportamentos alimentares potencialmente prejudiciais.
+- Evitar notas punitivas ou que reforcem comportamentos alimentares potencialmente prejudiciais.
 - Não inventar metas ou dados nutricionais.
 - Reconhecer limitações e incertezas das informações.
 - Preservar a confidencialidade dos dados de saúde.

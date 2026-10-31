@@ -6,8 +6,8 @@ alimentos ou registro real. Os trechos ilustram a avaliação; a resposta comple
 segue o formato da Skill e a composição feita pelo Core.
 
 Os cortes energéticos estão definidos na Skill. Estes exemplos demonstram
-sua aplicação como classificação inicial; uma diferença isolada não determina
-toda a avaliação nem aciona automaticamente 👋.
+sua aplicação como referência inicial; uma diferença isolada não determina
+toda a avaliação nem aciona automaticamente 👋 BOFETADA.
 
 ## 1. Ótimo exige avaliar o conjunto
 
@@ -43,7 +43,7 @@ ajuste relevante identificado além de pequenas diferenças calóricas.
   para Bom ou Alerta somente pelos 4 kcal a mais. Justificar qualquer mudança
   por diferença material de aderência, não pela passagem de um corte auxiliar.
 
-**Verificar:** os 5% não são uma fronteira automática de classificação nem
+**Verificar:** os 5% não são uma fronteira automática de nota nem
 uma margem de erro da foto. Não exigir coincidência exata com o alvo.
 
 ## 3. Mínimo e faixa não são alvos pontuais
@@ -82,7 +82,7 @@ porque não houve pesagem.
 ## 5. Lacuna relevante exige ressalva específica
 
 **Contexto:** a análise disponível sustenta um desvio calórico moderado e
-uma classificação Alerta. A quantidade de gordura do molho é desconhecida e
+uma nota Alerta. A quantidade de gordura do molho é desconhecida e
 pode ampliar o desvio; não há faixa numérica fundamentada para esse componente.
 
 **Avaliação ilustrativa:**
@@ -113,20 +113,20 @@ aderência às demais orientações permanecem equivalentes.
 **Verificar:** atualizar a magnitude sem forçar uma troca de rótulo. Uma
 correção material deve levar à reavaliação; não manter a nota por inércia.
 
-## 7. Conferir a justificativa de vermelho e 👋
+## 7. Conferir a justificativa de vermelho e 👋 BOFETADA
 
 **Dados para revisão:** objetivo de emagrecimento, alvo pontual fictício de
 2.000 kcal e nenhuma tolerância profissional diferente; dia completo com
 3.200 kcal documentadas. Diferença: +1.200 kcal (+60%). A matriz indica
-inicialmente Ruim, sem acionar 👋 automaticamente.
+inicialmente Ruim, sem acionar 👋 BOFETADA automaticamente.
 
-Se a avaliação do conjunto resultar em Ruim ou 👋, sua justificativa precisa
+Se a avaliação do conjunto resultar em Ruim ou 👋 BOFETADA, sua justificativa precisa
 identificar a orientação energética descumprida, o alvo de 2.000 kcal, o
 consumo de 3.200 kcal, o desvio de +1.200 kcal (+60%) e o contexto que sustenta
 a severidade escolhida. Não basta dizer "exagerou" ou "desvio grave".
 
 Este caso verifica a objetividade da justificativa e a ausência de promoção
-automática de vermelho para 👋 somente pelo percentual. Para uma
+automática de vermelho para 👋 BOFETADA somente pelo percentual. Para uma
 orientação qualitativa, descrever o comportamento previsto, o observado e
 a extensão do descumprimento, sem inventar uma conversão numérica.
 
@@ -196,6 +196,19 @@ precisão. Em zero de desvio, a base é verde; Ótimo exige os critérios própr
   não tratar o subtotal como consumo total diário para aplicar os cortes.
 - **Meta ausente, igual a zero, somente mínima/máxima, ou objetivo indefinido:**
   não aplicar a matriz; avaliar o que tiver base e informar a limitação.
+
+## 11. Avaliação geral sem plano
+
+**Contexto:** refeição com arroz, feijão, frango e vegetais, sem plano ou meta
+disponíveis. A análise fornece composição e porções estimadas suficientes para
+avaliar a refeição em termos gerais.
+
+> 🟢 **Bom** — A refeição combina fontes de proteína, carboidratos e vegetais.
+> As quantidades são estimadas e a avaliação é geral, sem comparação com plano.
+
+**Verificar:** atribuir farol quando houver base; preservar estimativas e
+nutrientes relevantes, sem criar meta, saldo, desvio ou aderência a um plano.
+Não aplicar a matriz calórica sem as condições necessárias.
 
 ## Origem e limites dos cortes
 

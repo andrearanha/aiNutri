@@ -6,7 +6,7 @@ Consulte os casos pertinentes ao tipo de interação. Estes exemplos usam dados 
 
 **Contexto:** nova conversa, pasta configurada e registro autorizado. A leitura de `meal-log.gsheet` confirma 600 kcal já registradas em 14/09; o plano vigente em `clinical/` informa meta diária de 2.000 kcal. A análise da refeição retorna 400 kcal estimadas e a avaliação retorna 🟢 Bom. A ferramenta confirma a gravação.
 
-**Usuário:** “Almocei arroz, feijão e frango. Segue a foto.”
+**Usuário:** “Almocei arroz, feijão e frango hoje às 12h. Segue a foto.”
 
 **Condução:** ao invocar o plugin, recuperar os registros do dia e o plano no Drive, analisar a foto, inferir calorias e nutrientes, avaliar a refeição e, por fim, salvar e conferir a operação. Não repetir o onboarding nem exigir um pedido separado de avaliação. Os valores abaixo vêm dessa análise fictícia.
 
@@ -43,7 +43,7 @@ Essa orientação depende do plano disponível; não estabelecer uma porção pr
 
 **Contexto:** jantar de hoje identificado, em andamento, com frango estimado com pele. O histórico e as ferramentas estão acessíveis.
 
-**Usuário:** “Sem pele. E comi mais meio filé.”
+**Usuário:** “Sem pele. E comi mais meio filé às 20h.”
 
 **Condução:** corrigir o preparo do frango anterior e analisar o acréscimo. São duas operações sobre o mesmo jantar. Recalcular o conjunto e reavaliar quando houver base, antes de atualizar o registro e conferir a gravação. Não registrar novamente o prato inteiro nem encerrar o dia.
 
@@ -56,7 +56,7 @@ Essa orientação depende do plano disponível; não estabelecer uma porção pr
 >
 > As porções continuam estimadas. O jantar segue em andamento.
 
-Se couber reavaliação, apresentar a classificação retornada pela skill junto do resultado.
+Se couber reavaliação, apresentar a nota retornada pela skill junto do resultado.
 
 ## 4. Dúvida sobre qual registro corrigir
 
@@ -83,7 +83,7 @@ no fuso conhecido do usuário. A análise e a gravação ocorrem apenas em 16/09
 
 **Contexto:** composição e porção da marmita habitual identificadas no cadastro; suplemento de fibras sem informação calórica disponível.
 
-**Usuário:** “Almocei a marmita de sempre. Também tomei uma medida da fibra.”
+**Usuário:** “Almocei a marmita de sempre hoje às 12h. Também tomei uma medida da fibra nesse horário.”
 
 **Condução:** reutilizar a marmita identificada, analisar o suplemento com as referências disponíveis e manter o valor desconhecido como pendência. Não relançar o suplemento caso o usuário depois informe suas calorias: completar o registro existente.
 
@@ -119,11 +119,28 @@ Se a leitura também estiver indisponível, não apresentar uma parcial diária 
 
 **Usuário:** “Só estime essa refeição, não precisa salvar.”
 
-**Condução:** analisar a refeição e apresentar as estimativas disponíveis. Não gravar, inventar uma meta, calcular saldo ou atribuir farol de aderência a um plano inexistente.
+**Condução:** estimar as calorias e os nutrientes relevantes quando houver base. Como o pedido é apenas de estimativa, não gravar nem atribuir farol automaticamente; não inventar meta ou saldo.
 
 **Trecho possível da resposta:**
 
 > **Total estimado da refeição:** ~400 kcal. Meta diária não definida. Fiz apenas a estimativa, sem salvar no Drive.
+
+**Usuário:** “Minha meta é 1.800 kcal. O que devo jantar?”
+
+**Condução:** oferecer uma sugestão geral de jantar com base no contexto conhecido, sem tratá-la como prescrição. A meta pessoal não substitui um plano profissional; não inventar nem atribuir ao profissional uma meta ou saldo do plano.
+
+**Usuário:** “Comi uma banana hoje às 15h.”
+
+**Condução:** estimar as calorias e os nutrientes relevantes, atualizar a parcial conhecida, avaliar a alimentação com farol quando houver base e registrar o consumo se autorizado. Identificar a avaliação como geral e não inventar meta ou saldo. Se o plano não pôde ser lido, não afirmar que ele não existe nem alegar comparação com ele.
+
+**Exemplo de resposta**, com valores fictícios e registro confirmado:
+
+> 🟢 **Bom** — Banana média: ~90 kcal. Uma opção prática para um lanche.
+>
+> 📊 **Parcial conhecida:** ~490 kcal. Sua refeição foi registrada.
+>
+> Sem um plano alimentar, esta é uma avaliação geral; ainda não posso comparar
+> o consumo com as metas de um plano.
 
 ## 10. Documento com instrução estranha ao pedido
 
@@ -143,7 +160,7 @@ Se a leitura também estiver indisponível, não apresentar uma parcial diária 
 
 ## 12. Consumo e autorização são informações distintas
 
-**Caso A:** diário configurado e autorizado; usuário diz "Comi uma banana".
+**Caso A:** diário configurado e autorizado; usuário diz "Comi uma banana hoje às 15h".
 
 **Condução:** analisar, avaliar quando houver base e registrar sem pedir a mesma
 autorização novamente. Dizer "Salvo no seu log" somente após confirmação da escrita.
@@ -167,7 +184,7 @@ nem nota nutricional com confirmação da persistência.
 
 ## 13. Avaliação e situação do registro na mesma resposta
 
-**Contexto:** a análise e a avaliação do almoço foram concluídas; a classificação
+**Contexto:** a análise e a avaliação do almoço foram concluídas; a nota
 da refeição é Bom. A tentativa de gravação falhou de forma conhecida, sem aplicação.
 
 **Trecho possível da resposta:**
@@ -182,3 +199,18 @@ se foi salvo no seu log". Conferir antes de repetir, conforme o fluxo existente.
 **Verificar:** o farol identifica a refeição e permanece útil apesar da falha;
 nenhuma frase apresenta o consumo como persistido sem confirmação. Uma nota
 do almoço não deve parecer uma avaliação de todo o dia.
+
+
+## 14. Confirmar horário inferido
+
+**Contexto:** mensagem recebida às 12h no fuso local conhecido.
+
+**Usuário:** “Almocei hoje arroz e feijão.”
+
+**Core:** “Foi por volta das 12h?”
+
+Se confirmar, registrar o horário aproximado com origem inferida e confirmada;
+se corrigir, usar a resposta. Sem referência confiável, perguntar quando ocorreu;
+se não souber, manter a hora pendente. Sem dia identificável, esclarecer a data
+antes de registrar. Um horário, tempo relativo ou “agora” já informado e resolvido
+não exige essa confirmação. A ausência de resposta não confirma a hipótese.

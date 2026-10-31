@@ -92,9 +92,8 @@ sobrescrever fórmulas ou substituir a planilha para restaurar a versão anterio
 
 **Gravação:** registrar somente a banana como consumo em 14/09. Atualizar o
 hábito no perfil apenas se isso fizer parte da operação autorizada recebida.
-Não lançar água hoje nem iogurte. Preservar o timestamp da mensagem e o horário
-aproximado do consumo em campos distintos ou observações compatíveis. Se a
-gravação ocorrer em 16/09, manter a banana em 14/09 e distinguir a data da escrita.
+Não lançar água hoje nem iogurte. Preservar o horário aproximado do consumo e
+sua origem. Se a gravação ocorrer em 16/09, manter a banana em 14/09.
 Não trocar a data pelo instante da gravação nem de uma tentativa posterior.
 
 ## 8. Resumo desatualizado e falta de escrita
@@ -102,9 +101,31 @@ Não trocar a data pelo instante da gravação nem de uma tentativa posterior.
 **Contexto:** uma correção nutricional está pronta, mas falta avaliação atualizada.
 O diário armazena um farol anterior da refeição.
 
-**Condução:** se a escrita estiver disponível, aplicar a correção autorizada e
-identificar a avaliação armazenada como pendente de revisão, sem inventar outro
-farol. Devolver à Core a necessidade de reavaliar e salvar o resultado.
+**Condução:** se a escrita estiver disponível, primeiro marcar a avaliação armazenada como
+desatualizada e confirmar; depois aplicar a correção autorizada, sem inventar
+outro farol. Devolver à Core a necessidade de reavaliar e salvar o resultado.
 
 Se não houver escrita, retornar não salvo com os dados preparados. A Core pode
 apresentar a análise na conversa, deixando explícito que não houve gravação.
+
+
+## 9. Cenários de aceitação do diário
+
+Todos os IDs e dados abaixo são fictícios. Em cada gravação, pressupõe-se
+pasta, acesso e rotina de registro autorizados e confirmação real das ferramentas.
+
+| Cenário | Condução e resultado esperado |
+| --- | --- |
+| Almoço às 12h de 14/09, nota Bom | Criar refeição `R1`, consumo `C1` vinculado, data e hora informadas; guardar alimentos, quantidades e nutrientes disponíveis. Em `Resumos`, nota de `R1`: Bom, 🟢 e justificativa da avaliação. Confirmar células e IDs. |
+| “Almocei hoje”, sem hora, mensagem local às 12h | Core pergunta “Foi por volta das 12h?”. Se confirmar, guardar horário aproximado e origem inferida confirmada; se corrigir, usar resposta. Sem referência confiável, perguntar quando; se não souber, guardar data conhecida, hora vazia e precisão pendente. Sem dia identificável, manter diário pendente. |
+| “Ontem por volta das 22h” | Resolver ontem por referência confiável, guardar dia local, texto aproximado e origem; não criar minutos. “Há 40 minutos” sem referência confiável exige pergunta pelo dia e horário aproximado necessários. |
+| Complemento e correção | `C1` tinha frango com pele; corrigir preparo mantendo `C1`. Meio filé adicional vira `C2`, vinculado a `R1`, após esclarecer seu horário se necessário. Registrar operação e valores anteriores; nova tentativa verifica IDs e não replica `C1` ou `C2`. |
+| Correção de dia | `C1` passa de 14/09 para 13/09 com o mesmo ID. Antes, marcar nota de `R1` e resumos dos dois dias desatualizados; dia fechado entra em revisão. Após confirmação, recalcular sobre consumos confirmados e guardar somente resultados disponíveis. |
+| Notas de escopos distintos | `R1`: Bom 🟢 pela composição; dia 14/09: Alerta 🟡 por desequilíbrio do conjunto, com justificativas da avaliação fictícia. São linhas diferentes; uma não substitui a outra. |
+| Nutriente pendente e dia insuficiente | Em `Nutrientes`, energia do suplemento com valor vazio e estado pendente; nota diária em `Resumos` com estado dados_insuficientes, conceito e farol vazios. Consumo confirmado permanece registrado; pendente não é zero. |
+| Consulta, orientação ou simulação | “Como foi minha alimentação de 14 a 16/09?” lê dados persistidos de todos os dias. Apresenta nota válida ou dados insuficientes por dia, inclusive dia sem registro; nota calculada na consulta não é salva. “Vou comer uma banana” e “O que acha?” não gravam consumo ou cadastro. Atualização de perfil explicitamente autorizada segue permitida. |
+| Falha parcial e nova conversa | Marcação de resumo desatualizado e correção de `C1` confirmadas; criação de `C2` incerta. Retornar parcial, com `C2` incerto e resumo em revisão. Em outro chat, ler diário e operação: se `C2` estiver confirmado, não repetir; se definitivamente ausente e causa resolvida, tentar uma vez; se ilegível ou ambíguo, parar e informar. Sem ID recuperável, buscar candidatos e esclarecer, sem presumir duplicação. |
+| Planilha legada | `Energia (kcal)` equivale a kcal; preservar fórmulas e colunas próprias, mapear itens e adicionar IDs e relações somente em espaço seguro. Se só houver total agregado, não inventar kcal por item; se não for possível ligar registros com segurança, interromper adaptação e informar a limitação. |
+
+Esses cenários são verificações de comportamento especificado, não prova de que
+um conector específico oferece criação de abas, escrita granular ou leitura completa.

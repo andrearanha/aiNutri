@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Relatório alimentar | aiNutri</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #19372d; background: #f2f7f3; }
+    * { box-sizing: border-box; }
+    body { margin: 0; line-height: 1.5; }
+    .page { width: min(1120px, 100%); margin: auto; padding: 28px 24px; }
+    .actions { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; margin-bottom: 24px; }
+    .print { border: 0; border-radius: 12px; padding: 16px 30px; background: #176b4b; color: white; font: inherit; font-weight: 750; font-size: 1.12rem; cursor: pointer; }
+    .print:focus-visible { outline: 3px solid #e5a52c; outline-offset: 4px; }
+    .eyebrow { color: #477664; text-transform: uppercase; font-size: .76rem; letter-spacing: .12em; font-weight: 750; }
+    h1 { margin: 4px 0 10px; font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.1; letter-spacing: -.035em; }
+    h2 { margin: 0 0 12px; font-size: 1.3rem; }
+    .lead { color: #567367; margin: 0 0 24px; }
+    .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 24px; }
+    .meta div, .panel { background: #fff; border: 1px solid #dce9df; border-radius: 16px; padding: 18px 20px; }
+    .meta dt { color: #648072; font-size: .8rem; font-weight: 650; }
+    .meta dd { margin: 4px 0 0; font-weight: 700; overflow-wrap: anywhere; }
+    .summary { display: grid; grid-template-columns: minmax(170px, .7fr) 2fr; gap: 20px; align-items: center; background: #e5f3e8; margin-bottom: 24px; }
+    .grade { font-size: clamp(2.4rem, 7vw, 4.5rem); line-height: 1.05; font-weight: 800; letter-spacing: -.035em; overflow-wrap: anywhere; }
+    .summary p { margin: 8px 0 0; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .91rem; }
+    th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid #e3eee5; vertical-align: top; }
+    th { font-size: .75rem; text-transform: uppercase; letter-spacing: .035em; color: #557566; background: #f4f9f5; }
+    td { white-space: nowrap; }
+    .note { white-space: normal; min-width: 125px; font-weight: 700; }
+    .muted { color: #587166; font-size: .9rem; }
+    .observations { margin-top: 20px; }
+    .observations p { margin: 0; white-space: pre-line; }
+    footer { border-top: 1px solid #dce9df; color: #587166; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 28px; padding-top: 18px; font-size: .87rem; }
+    a { color: #176b4b; overflow-wrap: anywhere; }
+    @media (max-width: 600px) { .page { padding: 18px 14px; } .actions .print { width: 100%; } .summary { grid-template-columns: 1fr; } }
+    @media print { @page { size: A4 landscape; margin: 12mm; } :root { background: #fff; } .page { width: 100%; padding: 0; } .actions { display: none; } .meta div, .panel { border-radius: 0; } .summary, .meta, .observations { break-inside: avoid; } .table-wrap { overflow: visible; } thead { display: table-header-group; } tr { break-inside: avoid; } th, td { white-space: normal; padding: 7px 5px; } footer { break-inside: avoid; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="actions"><button class="print" type="button" onclick="window.print()">Gerar PDF</button></div>
+    <header>
+      <div class="eyebrow">Acompanhamento alimentar</div>
+      <h1>Relatório do período</h1>
+      <p class="lead">Uma visão da alimentação registrada e dos pontos importantes para o acompanhamento.</p>
+      <dl class="meta">
+        <div><dt>Paciente</dt><dd>{{PACIENTE}}</dd></div>
+        <div><dt>Nutricionista</dt><dd>{{NUTRICIONISTA}}</dd></div>
+        <div><dt>Período de referência</dt><dd>{{PERIODO}}</dd></div>
+      </dl>
+    </header>
+    <section class="panel summary" aria-labelledby="titulo-nota">
+      <div><div class="eyebrow" id="titulo-nota">Nota do período</div><div class="grade">{{NOTA_PERIODO}}</div></div>
+      <div><h2>Visão geral</h2><p>{{JUSTIFICATIVA_PERIODO}}</p></div>
+    </section>
+    <section class="panel" aria-labelledby="titulo-dias">
+      <h2 id="titulo-dias">Dia a dia</h2>
+      <p class="muted">Diferença = ingerido − meta. Positivo: acima; negativo: abaixo. Os valores estimados e as pendências são identificados.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">Data</th><th scope="col">Nota do dia</th><th scope="col">Ingerido (kcal)</th><th scope="col">Diferença da meta (kcal)</th>{{COLUNAS_MACRONUTRIENTES}}</tr></thead>
+        <tbody>{{LINHAS_DIARIAS}}</tbody>
+      </table></div>
+    </section>
+    <section class="panel observations" aria-labelledby="titulo-observacoes"><h2 id="titulo-observacoes">Observações</h2><p>{{OBSERVACOES}}</p></section>
+    <footer><strong>aiNutri 🥗🥙🍏🍪</strong><a href="https://github.com/andrearanha/aiNutri" target="_blank" rel="noopener noreferrer">https://github.com/andrearanha/aiNutri</a></footer>
+  </main>
+</body>
+</html>

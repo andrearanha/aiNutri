@@ -24,12 +24,9 @@ de criação e gravação autorizadas são encaminhadas pelo Core à
 [data-writer](../data-writer/SKILL.md), que adapta os dados e devolve a confirmação.
 
 Ao final, o usuário deverá ter:
-- Sua conta Google Drive conectada.
-- Uma pasta de trabalho definida e acessível.
-- Seus objetivos alimentares registrados.
-- Sua dieta e plano nutricional salvos, se existentes.
-- Seus exames laboratoriais disponíveis, se fornecidos.
-- Confirmação das informações efetivamente persistidas.
+- Respondido, ou informado que ainda não sabe, qual é seu objetivo e se possui plano alimentar.
+- Sua conta Google Drive conectada e uma pasta de trabalho indicada, com leitura e escrita disponíveis e autorizadas.
+- Confirmação do que foi efetivamente persistido; plano e exames são opcionais.
 
 ## Princípios de interação
 
@@ -40,6 +37,14 @@ Ao final, o usuário deverá ter:
 - Não repetir perguntas cujas respostas já estejam disponíveis.
 - Adaptar a conversa ao nível de conhecimento do usuário.
 - Retomar configurações interrompidas sem duplicar dados.
+- Primeiro, perguntar sobre objetivo, plano alimentar e pasta no Google Drive.
+  Depois de confirmar o acesso necessário à pasta, explicar que o essencial
+  está pronto e prosseguir com perguntas opcionais para melhorar o acompanhamento.
+- Apresentar as perguntas adicionais em pequenos grupos, permitindo responder,
+  pular ou começar o acompanhamento a qualquer momento. Não repetir o que já
+  foi informado nem transformar a conversa em um questionário longo.
+- Em toda mensagem ao usuário que mencionar a pasta de trabalho, identifique-a
+  explicitamente como uma pasta no Google Drive.
 
 ## Contexto temporal
 
@@ -55,45 +60,83 @@ interpretar datas ou horários, leia e aplique a [regra de contexto temporal com
   timestamp da mensagem que envia um documento não substitui a data do exame,
   da medição ou do início de vigência do plano.
 
-## Etapa 1 — Boas-vindas
+## Etapa 1 — Objetivo e plano alimentar
 
-Apresentar o aiNutri como um assistente que ajuda a seguir
-uma dieta, registrar refeições e acompanhar a evolução
-alimentar ao longo do tempo.
+Apresente brevemente o aiNutri e pergunte qual é o objetivo do usuário e se ele
+já possui plano alimentar. As respostas podem ser simples; não exija meta
+numérica, prazo, documento ou decisão imediata. Se o plano existir, ofereça a
+possibilidade de enviá-lo ou descrevê-lo agora ou depois. Se a pessoa não souber
+o objetivo ou ainda não quiser informar o plano, registre a pendência sem
+impedir a configuração da pasta.
 
-Explicar que a configuração inicial permite personalizar
-o acompanhamento e preservar os dados entre conversas.
+Exemplo de abertura:
 
-Confirmar que o usuário está configurando para uso próprio e não para acompanhamento de terceiros. Se for o seugndo caso, informar que o aiNutri serve para uso pessoal e que o profissional deve indicar o plugin para seus pacientes.
+> Olá! Vou ajudar você a registrar suas refeições e acompanhar sua alimentação.
+> Qual é seu objetivo? Você já tem um plano alimentar?
 
-Instruções estão disponíveis em: https://github.com/andrearanha/aiNutri
+Presuma uso pessoal sem fazer uma pergunta específica na abertura. Se o usuário
+explicitar que pretende acompanhar terceiros, explique que o aiNutri é para uso
+pessoal e que o profissional pode indicá-lo aos seus pacientes.
 
-## Etapa 2 — Conexão com Google Drive
+## Etapa 2 — Conexão e pasta no Google Drive
 
-O Google Drive será utilizado como armazenamento persistente.
+Explique que uma pasta no Google Drive, com acesso de leitura e escrita, é
+necessária para iniciar o acompanhamento e preservar os dados entre conversas.
+Peça ao usuário que conecte a própria conta, indique uma pasta existente e
+autorize seu uso pelo aiNutri. Apresente instruções específicas de conexão
+somente se forem necessárias e estiverem disponíveis na plataforma.
 
-1. Verificar se existe um conector Google Drive disponível.
-2. Se não estiver conectado, orientar o usuário a realizar
-   a conexão pelas configurações de aplicativos da plataforma.
-3. Solicitar que o próprio usuário autorize a conta Google, deixando claro que o aiNutri não tem acesso a senhas ou credenciais. E que ele deverá informar uma *pasta de trabalho* exclusiva para o aiNutri salvar e consultar suas informações.
-4. Verificar quais operações de leitura e escrita estão
-   efetivamente disponíveis.
-5. Nunca solicitar senhas, tokens ou credenciais diretamente.
+Exemplo:
 
-Se não houver conector compatível, explicar a limitação.
-Não simular conexão ou persistência.
+> Preciso de apenas uma pasta no seu Google Drive para guardar seus registros
+> e organizar livremente os arquivos do aiNutri.
+>
+> Conecte sua conta, autorize leitura e escrita e indique qual pasta do seu
+> Google Drive devo usar.
 
-## Etapa 3 — Pasta de trabalho
+- Verifique se o conector está disponível e se a conta e a pasta indicadas são
+  identificáveis. Use o ID ou URL da pasta quando disponível e esclareça qualquer
+  ambiguidade antes de ler ou gravar dados pessoais.
+- Verifique as operações reais de leitura e escrita necessárias na pasta e as
+  capacidades oferecidas pelas ferramentas. Metadados suficientes ou o resultado
+  confirmado de uma gravação inicial autorizada podem comprovar o acesso; se isso
+  não puder ser verificado, informe a pendência. Não crie arquivos de teste nem
+  faça alterações não autorizadas apenas para verificar permissões.
+- Esclareça a finalidade da autorização: guardar as informações fornecidas para
+  o acompanhamento e os registros cotidianos de refeições na pasta escolhida.
+  A autorização para esses registros não inclui compartilhar dados ou armazenar
+  documentos clínicos sem a confirmação específica prevista abaixo.
+- Use exclusivamente a pasta selecionada e seus subdiretórios; não altere
+  permissões nem substitua conteúdo existente. Nunca solicite senhas, tokens ou
+  credenciais na conversa.
+- A organização interna é responsabilidade do aiNutri. Não peça que o usuário
+  escolha nomes de arquivos, estrutura ou formatos. Quando uma criação interna
+  for necessária, encaminhe-a à data-writer dentro da autorização concedida,
+  respeitando as confirmações exigidas pela plataforma.
 
-Perguntar se o usuário deseja criar uma pasta dedicada
-ou utilizar uma pasta existente no Google Drive.
+Se não houver conector, leitura, escrita ou autorização, explique a limitação e
+oriente a conexão, a concessão de acesso ou a indicação de outra pasta pelo
+próprio usuário. Não dê a configuração essencial como concluída e não inicie o
+acompanhamento enquanto a pasta com acesso necessário não estiver confirmada.
+Preserve na conversa as respostas já dadas para retomar a configuração; não
+afirme que foram salvas. Não crie outra pasta ou escolha outra conta por conta
+própria para contornar a falha.
 
-Nome padrão sugerido: aiNutri
+Exemplo de impedimento:
 
-- Solicitar autorização antes de criar qualquer pasta.
-- Não substituir pastas ou arquivos existentes.
-- Identificar a pasta por seu ID ou URL, quando disponível.
-- Utilizar exclusivamente a pasta selecionada e seus subdiretórios para os dados do aiNutri.
+> Ainda não consegui confirmar o acesso de escrita na pasta do seu Google Drive.
+> Para começar, autorize a escrita ou indique outra pasta do Google Drive.
+
+Quando as três perguntas tiverem sido feitas, a pasta e o acesso necessário
+estiverem confirmados e as autorizações pertinentes tiverem sido obtidas, diga:
+
+> Pronto, já temos o essencial para começar! Vou fazer mais algumas perguntas
+> opcionais para melhorar seu acompanhamento. Você pode pular qualquer uma ou
+> começar a registrar suas refeições quando quiser.
+
+Afirme que os dados foram salvos apenas após confirmação efetiva da gravação.
+
+### Organização interna
 
 Organização inicial sugerida:
 
@@ -102,18 +145,39 @@ aiNutri/
   profile.md # dados do usuário com informações de objetivos, rotina, restrições alimentares, etc
   food-registry.gsheet # meal-registry: cadastro reutilizável de alimentos, produtos e receitas conhecidos, com nomes únicos
   clinical/ # diretório com exames laboratoriais, receitas de remédios, dietas e plano alimentar  fornecidos pelo usuário
-  meal-log.gsheet # Principal persistência: planilha com registro de refeições, horários, Kcalorias, macronutrientes, descrição inferida do prato, e informações relevantes do contexto
+  meal-log.gsheet # Diário de refeições, consumos, notas e alterações
+
+O diário novo segue o [modelo e estrutura vazia](../data-writer/references/meal-log-model.md); o Core encaminha sua criação autorizada à data-writer e confirma o resultado real. Se as ferramentas não permitirem criá-lo ou conferi-lo, informe a pendência.
 
 O cadastro de alimentos conhecidos segue as [regras de meal-registry](../../references/meal-registry.md).
 Ele é alimentado durante o uso autorizado, sem exigir um catálogo completo no
 onboarding. Não preencher exemplos ou uma base inicial fictícia; o modelo do
 arquivo e a eventual distribuição de uma base nutricional serão definidos depois.
 
-## Etapa 4 — Perfil e objetivos
+## Etapa 3 — Informações adicionais para o perfil
 
-Coletar progressivamente as informações necessárias.
+Depois da configuração essencial, colete progressivamente as informações que
+podem melhorar o acompanhamento. Todas são opcionais neste momento; explique
+a finalidade e permita que o usuário pule ou pare. Solicite idade, peso ou
+altura antes de uma análise específica que realmente dependa deles, sem inventar
+valores. Não reapresente perguntas já respondidas.
 
-Em primeiro lugar, nome, idade, peso e altura.
+Exemplos de perguntas em momentos separados:
+
+> Como você prefere que eu te chame? Se quiser, pode me informar sua idade,
+> peso e altura para ajudar a personalizar o acompanhamento.
+
+> Você tem alguma alergia, intolerância ou restrição alimentar que eu deva
+> considerar? Isso ajuda a evitar sugestões inadequadas.
+
+> Como é sua rotina de refeições e atividade física? Há alguma dificuldade
+> que você gostaria de acompanhar?
+
+> Você usa algum medicamento ou suplemento que considere relevante para o
+> acompanhamento? Se preferir, podemos deixar isso para depois.
+
+Antes de sugerir alimentos, esclareça alergias e restrições relevantes quando
+necessário; a possibilidade de pular perguntas não autoriza presumir ausência.
 
 Objetivos:
 - Principal objetivo alimentar ou nutricional.
@@ -129,22 +193,45 @@ Contexto:
 
 Não presumir condições de saúde ou objetivos (como emagrecimento ou qualquer outro).
 
-## Etapa 5 — Dieta e plano nutricional
+## Etapa 4 — Dieta e plano nutricional
 
-Perguntar se o usuário já segue uma dieta ou possui
-plano alimentar elaborado por nutricionista ou médico.
+Retome o plano alimentar perguntado na abertura, sem repetir a pergunta se a
+resposta já for conhecida. Se houver plano ainda não enviado, ofereça novamente
+o envio quando oportuno; o usuário pode deixar para depois.
+
+> Se quiser, você pode me enviar seu plano alimentar ou contar as orientações
+> principais. Assim posso considerar essas orientações no acompanhamento.
 
 1. Solicitar o documento ou a descrição do plano.
 2. Identificar metas, refeições e orientações relevantes.
 3. Distinguir prescrições profissionais de preferências e objetivos informados pelo próprio usuário.
 4. Solicitar confirmação antes de armazenar os dados (no Google Drive dele)
 
-Se não existir:
+Se o usuário confirmar que não existe plano:
 - Registrar que não há plano nutricional formal.
-- Prosseguir normalmente com o acompanhamento.
+- Informar que é fortemente recomendado ter um plano alimentar elaborado por
+  nutricionista para usar o aiNutri e que ele pode ser fornecido depois.
+- Explicar que o acompanhamento pode incluir registro, estimativas de calorias
+  e nutrientes, avaliações com farol e sugestões, conforme os dados disponíveis.
+  Sem plano, não há comparação com as metas de um plano alimentar nem saldo em
+  relação a elas; não inventar metas.
+- Permitir o registro autorizado das refeições e dos dados estimados.
 - Não inventar uma prescrição alimentar.
 
-## Etapa 6 — Exames laboratoriais
+Exemplo:
+
+> É fortemente recomendado usar o aiNutri com um plano alimentar feito por
+> nutricionista. Você pode fornecer o seu depois.
+>
+> Enquanto isso, posso registrar e avaliar suas refeições, estimar calorias e
+> nutrientes e oferecer sugestões. Com um plano, também poderei comparar o que
+> você consumiu com as metas dele, e sugerir refeições **compatíveis com seus gostos**.
+
+Se o usuário não souber ou preferir responder depois, mantenha a situação do
+plano como desconhecida; não registre que ele não existe. Faça as análises e
+avaliações possíveis e não compare o consumo com metas de um plano não confirmado.
+
+## Etapa 5 — Exames laboratoriais
 
 Oferecer a possibilidade de incluir exames recentes,
 especialmente aqueles relacionados ao acompanhamento
@@ -152,20 +239,32 @@ nutricional e metabólico.
 
 Esta etapa é opcional.
 
+> Você também pode compartilhar exames recentes que considere relevantes para
+> o acompanhamento. Isso é opcional e pode ficar para outro momento.
+
 Quando documentos forem fornecidos:
 1. Identificar a data e o tipo de exame.
 2. Preservar os documentos originais.
-3. Solicitar autorização para armazená-los na pasta exames/.
+3. Solicitar autorização específica para armazená-los na pasta escolhida.
 4. Não inferir diagnósticos nem substituir avaliação médica.
 5. Não divulgar informações clínicas fora do contexto
    autorizado pelo usuário.
 
 Não exigir exames para utilizar o aiNutri.
 
-## Etapa 7 — Persistência
+## Etapa 6 — Persistência
 
-Antes de gravar, apresentar resumidamente as informações
-que serão armazenadas e solicitar confirmação.
+Antes da gravação inicial de informações pessoais, apresente um resumo breve e
+obtenha autorização para armazená-las na pasta escolhida e registrar as refeições
+do acompanhamento. Reutilize a autorização já concedida para a mesma finalidade;
+não repita confirmações sem necessidade. Para documentos clínicos, obtenha a
+confirmação específica antes do armazenamento.
+
+Exemplo, caso a autorização ainda não tenha sido concedida:
+
+> Posso guardar na pasta do seu Google Drive as informações que você compartilhou
+> para o acompanhamento e registrar suas refeições? Exames e outros documentos
+> clínicos só serão armazenados com sua confirmação específica.
 
 O Core deve acionar data-writer com os dados, destinos e autorizações para:
 - Registrar ou atualizar o perfil.
@@ -178,11 +277,11 @@ Não gravar informações inventadas ou inferidas como fatos.
 Confirmar o resultado real das operações.
 Não afirmar que informações foram salvas sem confirmação.
 
-Se a escrita não estiver disponível, fornecer um resumo
-que possa ser salvo posteriormente e indicar que a
-configuração permanece parcialmente concluída.
+Se a gravação inicial não puder ser confirmada, apresente as pendências e retome
+somente após verificar o acesso necessário. Se ocorrer falha posterior, informe
+o que foi ou não salvo e preserve um resumo recuperável na conversa.
 
-## Etapa 8 — Conclusão
+## Etapa 7 — Conclusão
 
 Apresentar um resumo breve contendo:
 - Objetivo principal.
