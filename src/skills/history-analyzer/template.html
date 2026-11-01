@@ -29,13 +29,16 @@
     th { font-size: .75rem; text-transform: uppercase; letter-spacing: .035em; color: #557566; background: #f4f9f5; }
     td { white-space: nowrap; }
     .note { white-space: normal; min-width: 125px; font-weight: 700; }
+    .day-reason td { white-space: normal; overflow-wrap: anywhere; }
+    .day-reason.warning td { background: #fff3cd; color: #664d03; }
+    .day-reason.danger td { background: #f8d7da; color: #842029; }
     .muted { color: #587166; font-size: .9rem; }
     .observations { margin-top: 20px; }
     .observations p { margin: 0; white-space: pre-line; }
     footer { border-top: 1px solid #dce9df; color: #587166; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 28px; padding-top: 18px; font-size: .87rem; }
     a { color: #176b4b; overflow-wrap: anywhere; }
     @media (max-width: 600px) { .page { padding: 18px 14px; } .actions .print { width: 100%; } .summary { grid-template-columns: 1fr; } }
-    @media print { @page { size: A4 landscape; margin: 12mm; } :root { background: #fff; } .page { width: 100%; padding: 0; } .actions { display: none; } .meta div, .panel { border-radius: 0; } .summary, .meta, .observations { break-inside: avoid; } .table-wrap { overflow: visible; } thead { display: table-header-group; } tr { break-inside: avoid; } th, td { white-space: normal; padding: 7px 5px; } footer { break-inside: avoid; } }
+    @media print { @page { size: A4 landscape; margin: 12mm; } :root { background: #fff; } .page { width: 100%; padding: 0; } .actions { display: none; } .meta div, .panel { border-radius: 0; } .summary, .meta, .observations { break-inside: avoid; } .table-wrap { overflow: visible; } thead { display: table-header-group; } tbody, tr { break-inside: avoid; } th, td { white-space: normal; padding: 7px 5px; } footer { break-inside: avoid; } }
   </style>
 </head>
 <body>
@@ -60,7 +63,7 @@
       <p class="muted">Diferença = ingerido − meta. Positivo: acima; negativo: abaixo. Os valores estimados e as pendências são identificados.</p>
       <div class="table-wrap"><table>
         <thead><tr><th scope="col">Data</th><th scope="col">Nota do dia</th><th scope="col">Ingerido (kcal)</th><th scope="col">Diferença da meta (kcal)</th>{{COLUNAS_MACRONUTRIENTES}}</tr></thead>
-        <tbody>{{LINHAS_DIARIAS}}</tbody>
+        {{LINHAS_DIARIAS}}
       </table></div>
     </section>
     <section class="panel observations" aria-labelledby="titulo-observacoes"><h2 id="titulo-observacoes">Observações</h2><p>{{OBSERVACOES}}</p></section>

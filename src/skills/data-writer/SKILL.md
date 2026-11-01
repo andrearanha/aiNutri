@@ -29,7 +29,7 @@ não inicie outra conversa nem acione outras skills em círculo.
 Receber no formato suportado pela plataforma, sem exigir JSON ou código:
 
 - Operação: novo registro, complemento, correção, conclusão de uma pendência
-  ou atualização autorizada de perfil, cadastro ou documento.
+  ou atualização autorizada de perfil, cadastro ou documento; salvamento de relatório HTML.
 - Pasta e conta selecionadas, destinos conhecidos por ID/URL e autorização
   aplicável. Para criação inicial, receber o local autorizado pelo onboarding.
 - Dados a gravar: refeição, data do consumo, horário por consumo ou pendência após pergunta, itens,
@@ -68,7 +68,7 @@ datas ou horários, leia e aplique a [regra de contexto temporal compartilhado](
 
 Trabalhar somente na pasta do usuário selecionada no onboarding e em seus
 subdiretórios. Os destinos usuais são `meal-log.gsheet`, `food-registry.gsheet`,
-`profile.md` e os documentos em `clinical/`, conforme a organização encontrada.
+`profile.md`, os documentos em `clinical/` e relatórios HTML em `reports/`, conforme a organização encontrada.
 Identificar os recursos reais por ID/URL e tipo; o nome com `.gsheet` não exige
 criar ou enviar um arquivo local com essa extensão.
 
@@ -82,6 +82,10 @@ Em perfil e documentos, atualizar somente o conteúdo autorizado, preservando
 as demais informações e os originais clínicos. Um hábito pertence ao perfil;
 não o transformar em ingestão de hoje. Um cadastro de alimento reutilizável
 não é outro consumo e deve manter sua porção de referência e origem.
+
+### Relatórios de período
+
+Receba o HTML completo, período, destino e autorização da Core. Identifique a subpasta `reports/` dentro da pasta aiNutri selecionada e reutilize-a; crie-a quando não existir e a operação estiver autorizada. Preserve relatórios anteriores: use nome identificando o período e versão distinta, sem sobrescrever. Se a leitura ou criação estiver incerta, verifique o resultado antes de tentar novamente para evitar duplicação. Não altere o diário nem publique ou compartilhe o arquivo. Devolva confirmação e link ou a limitação específica à Core.
 
 ### Cadastro de alimentos e refeições conhecidas
 

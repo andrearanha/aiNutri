@@ -29,13 +29,16 @@
     th { font-size: .75rem; text-transform: uppercase; letter-spacing: .035em; color: #557566; background: #f4f9f5; }
     td { white-space: nowrap; }
     .note { white-space: normal; min-width: 125px; font-weight: 700; }
+    .day-reason td { white-space: normal; overflow-wrap: anywhere; }
+    .day-reason.warning td { background: #fff3cd; color: #664d03; }
+    .day-reason.danger td { background: #f8d7da; color: #842029; }
     .muted { color: #587166; font-size: .9rem; }
     .observations { margin-top: 20px; }
     .observations p { margin: 0; white-space: pre-line; }
     footer { border-top: 1px solid #dce9df; color: #587166; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 28px; padding-top: 18px; font-size: .87rem; }
     a { color: #176b4b; overflow-wrap: anywhere; }
     @media (max-width: 600px) { .page { padding: 18px 14px; } .actions .print { width: 100%; } .summary { grid-template-columns: 1fr; } }
-    @media print { @page { size: A4 landscape; margin: 12mm; } :root { background: #fff; } .page { width: 100%; padding: 0; } .actions { display: none; } .meta div, .panel { border-radius: 0; } .summary, .meta, .observations { break-inside: avoid; } .table-wrap { overflow: visible; } thead { display: table-header-group; } tr { break-inside: avoid; } th, td { white-space: normal; padding: 7px 5px; } footer { break-inside: avoid; } }
+    @media print { @page { size: A4 landscape; margin: 12mm; } :root { background: #fff; } .page { width: 100%; padding: 0; } .actions { display: none; } .meta div, .panel { border-radius: 0; } .summary, .meta, .observations { break-inside: avoid; } .table-wrap { overflow: visible; } thead { display: table-header-group; } tbody, tr { break-inside: avoid; } th, td { white-space: normal; padding: 7px 5px; } footer { break-inside: avoid; } }
   </style>
 </head>
 <body>
@@ -48,22 +51,22 @@
       <dl class="meta">
         <div><dt>Paciente</dt><dd>Pessoa Exemplo</dd></div>
         <div><dt>Nutricionista</dt><dd>Profissional Exemplo</dd></div>
-        <div><dt>Período de referência</dt><dd>01/09/2026 a 03/09/2026</dd></div>
+        <div><dt>Período de referência</dt><dd>01/09/2026 a 05/09/2026</dd></div>
       </dl>
     </header>
     <section class="panel summary" aria-labelledby="titulo-nota">
       <div><div class="eyebrow" id="titulo-nota">Nota do período</div><div class="grade">🟡 Alerta</div></div>
-      <div><h2>Visão geral</h2><p>Nos dois dias com registros, um teve proteína abaixo da meta informada. O terceiro dia não tem registros, limitando a análise do período.</p></div>
+      <div><h2>Visão geral</h2><p>Nos dias com registros, houve desvios relevantes de energia e proteína. Um dia sem registros limita a análise do período.</p></div>
     </section>
     <section class="panel" aria-labelledby="titulo-dias">
       <h2 id="titulo-dias">Dia a dia</h2>
       <p class="muted">Diferença = ingerido − meta. Positivo: acima; negativo: abaixo. Os valores estimados e as pendências são identificados.</p>
       <div class="table-wrap"><table>
         <thead><tr><th scope="col">Data</th><th scope="col">Nota do dia</th><th scope="col">Ingerido (kcal)</th><th scope="col">Diferença da meta (kcal)</th><th scope="col">Proteínas ingeridas (g)</th><th scope="col">Diferença da meta de proteínas (g)</th></tr></thead>
-        <tbody><tr><td>01/09/2026</td><td class="note">🟢 Bom</td><td>~1.850</td><td>−150</td><td>~120</td><td>+20 (mínimo)</td></tr><tr><td>02/09/2026</td><td class="note">🟡 Alerta</td><td>~2.100</td><td>+100</td><td>~80</td><td>−20 (mínimo)</td></tr><tr><td>03/09/2026</td><td class="note">Dados insuficientes</td><td>Sem registros</td><td>—</td><td>Sem registros</td><td>—</td></tr></tbody>
+        <tbody><tr><td>01/09/2026</td><td class="note">🟢 Bom</td><td>~1.850</td><td>−150</td><td>~120</td><td>+20 (mínimo)</td></tr></tbody><tbody><tr><td>02/09/2026</td><td class="note">🟡 Alerta</td><td>~2.100</td><td>+100</td><td>~80</td><td>−20 (mínimo)</td></tr><tr class="day-reason warning"><td colspan="6"><strong>Motivo do alerta:</strong> proteínas estimadas 20 g abaixo do mínimo do plano.</td></tr></tbody><tbody><tr><td>03/09/2026</td><td class="note">🔴 Ruim</td><td>~2.500</td><td>+500</td><td>~85</td><td>−15 (mínimo)</td></tr><tr class="day-reason danger"><td colspan="6"><strong>Motivo da nota Ruim:</strong> energia estimada 500 kcal acima da meta e proteínas 15 g abaixo do mínimo.</td></tr></tbody><tbody><tr><td>04/09/2026</td><td class="note">👋 BOFETADA</td><td>~4.000</td><td>+2.000</td><td>~60</td><td>−40 (mínimo)</td></tr><tr class="day-reason danger"><td colspan="6"><strong>Motivo da BOFETADA:</strong> consumo estimado no dobro da meta de energia, com repetição de grandes porções e proteínas 40 g abaixo do mínimo; o conjunto representa um desvio excepcional do plano.</td></tr></tbody><tbody><tr><td>05/09/2026</td><td class="note">Dados insuficientes</td><td>Sem registros</td><td>—</td><td>Sem registros</td><td>—</td></tr></tbody>
       </table></div>
     </section>
-    <section class="panel observations" aria-labelledby="titulo-observacoes"><h2 id="titulo-observacoes">Observações</h2><p>Exemplo fictício. Meta energética pontual: 2.000 kcal/dia; proteína: mínimo de 100 g/dia. Valores estimados. Não há registros para 03/09; isso não indica ausência de consumo.</p></section>
+    <section class="panel observations" aria-labelledby="titulo-observacoes"><h2 id="titulo-observacoes">Observações</h2><p>Exemplo fictício. Meta energética pontual: 2.000 kcal/dia; proteína: mínimo de 100 g/dia. Valores estimados. Não há registros para 05/09; isso não indica ausência de consumo.</p></section>
     <footer><strong>aiNutri 🥗🥙🍏🍪</strong><a href="https://github.com/andrearanha/aiNutri" target="_blank" rel="noopener noreferrer">https://github.com/andrearanha/aiNutri</a></footer>
   </main>
 </body>

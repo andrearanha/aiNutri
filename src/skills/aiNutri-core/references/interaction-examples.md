@@ -227,3 +227,13 @@ se corrigir, usar a resposta. Sem referência confiável, perguntar quando ocorr
 se não souber, manter a hora pendente. Sem dia identificável, esclarecer a data
 antes de registrar. Um horário, tempo relativo ou “agora” já informado e resolvido
 não exige essa confirmação. A ausência de resposta não confirma a hipótese.
+
+## 15. Autorização inicial sem expor instruções internas
+
+**Contexto:** o usuário indicou uma pasta no Google Drive, informou seus objetivos e enviou um plano alimentar. Ainda falta sua autorização para salvar esses dados e registrar as refeições.
+
+**Resposta possível:**
+
+> Posso guardar seus objetivos e o plano alimentar nessa pasta do seu Google Drive registrar as refeições que você relatar e guardar seus relatórios durante o acompanhamento?
+
+**Verificar:** o pedido explica o que será salvo e para quê, incluindo o plano, sem citar skills, suas funções ou regras internas. Só confirmar o salvamento depois da gravação efetiva.

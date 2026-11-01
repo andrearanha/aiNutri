@@ -2,7 +2,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ainutri",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "IA que ajuda você a seguir sua dieta, registrar refeições, controlar calorias e nutrientes e acompanhar sua evolução.",
   "keywords": [
     "nutrition",
