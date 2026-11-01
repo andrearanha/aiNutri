@@ -333,8 +333,10 @@ ou o caráter do usuário.
 Responder de maneira sucinta, contendo:
 
 1. A nota, com o farol e seu conceito.
-2. Uma justificativa objetiva.
+2. Uma justificativa objetiva, preferencialmente na mesma linha do farol e do conceito.
 3. Opcionalmente, uma recomendação prática e breve.
+
+O conceito pode ser acompanhado de uma qualificação ou avaliação curta sustentada pelos dados, como `🟢 **Bom** — Composição equilibrada.` ou `🟡 **Alerta leve** — Desvio pontual que merece atenção.` A qualificação é opcional e deve refletir a justificativa, sem criar outro conceito ou suavizar um desvio importante. Na persistência, preserve um dos cinco conceitos oficiais (por exemplo, `Alerta`) e mantenha a qualificação na justificativa.
 
 Exemplo:
 

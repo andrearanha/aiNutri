@@ -186,6 +186,7 @@ Objetivos:
 
 Contexto:
 - Preferências e restrições alimentares.
+- Preferências de comunicação espontaneamente informadas, como respostas curtas ou detalhadas; não exigem uma pergunta adicional.
 - Alergias ou intolerâncias relevantes.
 - Rotina de refeições e atividade física.
 - Uso de medicamentos e suplementos.

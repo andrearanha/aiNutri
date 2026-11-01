@@ -4,7 +4,7 @@ Consulte os casos pertinentes ao tipo de interação. Estes exemplos usam dados 
 
 ## 1. Registrar e reunir os resultados
 
-**Contexto:** nova conversa, pasta configurada e registro autorizado. A leitura de `meal-log.gsheet` confirma 600 kcal já registradas em 14/09; o plano vigente em `clinical/` informa meta diária de 2.000 kcal. A análise da refeição retorna 400 kcal estimadas e a avaliação retorna 🟢 Bom. A ferramenta confirma a gravação.
+**Contexto:** nova conversa, pasta configurada e registro autorizado. O perfil informa preferência por respostas curtas. A leitura de `meal-log.gsheet` confirma 600 kcal e 30 g de proteínas já registrados em 14/09; o plano vigente em `clinical/` informa meta diária de 2.000 kcal, mínimo diário de 100 g de proteínas e prevê uma fonte proteica no lanche da tarde, próxima refeição no momento da resposta. A análise da refeição retorna 400 kcal e 40 g de proteínas estimadas, e a avaliação retorna 🟢 Bom. A ferramenta confirma a gravação.
 
 **Usuário:** “Almocei arroz, feijão e frango hoje às 12h. Segue a foto.”
 
@@ -14,18 +14,31 @@ Consulte os casos pertinentes ao tipo de interação. Estes exemplos usam dados 
 
 > 🍽️ **Almoço — 14/09**
 >
-> | Alimento | Porção estimada | Calorias |
-> | --- | --- | --- |
-> | Arroz cozido | 100 g | ~130 kcal |
-> | Feijão cozido | 100 g | ~80 kcal |
-> | Frango grelhado | 115 g | ~190 kcal |
-> | **Total** | | **~400 kcal** |
+> | Alimento | Porção estimada | Calorias | Proteínas |
+> | --- | --- | --- | --- |
+> | Arroz cozido | 100 g | ~130 kcal | ~3 g |
+> | Feijão cozido | 100 g | ~80 kcal | ~5 g |
+> | Frango grelhado | 115 g | ~190 kcal | ~32 g |
+> | **Total** | | **~400 kcal** | **~40 g** |
 >
 > 🟢 **Bom** — Refeição alinhada ao plano informado.
 >
 > **Parcial do dia:** ~1.000 kcal · Meta: 2.000 kcal · Saldo: ~1.000 kcal.
 >
-> Salvo no seu Drive. Porções estimadas pela foto.
+> **Proteínas:** ~70 g · Faltam ~30 g para o mínimo diário.
+>
+> Salvo no seu Drive.
+>
+> **Próxima: lanche da tarde — mantenha a fonte de proteína do plano.**
+
+**Verificar:** o lembrete é opcional e cabe em uma linha. Sem próxima refeição identificável ou prioridade útil, omiti-lo sem perguntar. Se o almoço for registrado retroativamente após o jantar, não apresentar o lanche da tarde já passado como próximo. Em uma refeição ainda em andamento, aguardar sua conclusão.
+
+**Variações de concisão e acompanhamento:**
+
+- Com 105 g de proteínas e mínimo diário de 100 g, usar “**Proteínas:** ~105 g · Mínimo diário atingido.”, sem classificar os 5 g acima do mínimo como excesso.
+- Sem meta proteica disponível, mostrar apenas as proteínas conhecidas. Se houver item com proteína desconhecida, identificar a exclusão e não apresentar o valor restante como conferido.
+- Uma preferência por respostas curtas vale também no novo chat após leitura do perfil. Se o usuário pedir “Explique a nota em detalhes”, explicar o necessário naquele turno, preservando a preferência habitual.
+- Se a avaliação retornar “🟡 **Alerta leve** — Desvio pontual que merece atenção.”, preservar essa descrição na resposta. Ao salvar, o conceito continua `Alerta`; a qualificação integra a justificativa.
 
 ## 2. Intenção e pergunta na mesma mensagem
 

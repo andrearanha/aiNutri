@@ -15,7 +15,7 @@ description: >-
 ## Papel e limites
 
 Executar a função de **Salvar** do plugin com as ferramentas autorizadas da
-plataforma. A [ainutri-core](../aiNutri-core/SKILL.md) é a única interlocutora
+plataforma. A [ainutri-core](../ainutri-core/SKILL.md) é a única interlocutora
 do usuário: decide o que deve ser registrado, reúne autorizações, aciona esta
 skill e apresenta o resultado. Não peça ao usuário para chamar uma skill pelo nome.
 
