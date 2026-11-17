@@ -13,6 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Preencher versão dos manifestos
+        run: |
+          version=$(date -u +%F)
+          for manifest in src/plugin.json src/.claude-plugin/plugin.json; do
+            jq -e '.version == "{{VERSION}}"' "$manifest" > /dev/null
+            tmp=$(mktemp)
+            jq --arg version "$version" '.version = $version' "$manifest" > "$tmp"
+            mv "$tmp" "$manifest"
+          done
+
       - name: Gerar ZIP
         run: |
           mkdir -p dist
