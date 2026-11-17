@@ -26,6 +26,19 @@ o modelo completo do arquivo nem incluem uma base nutricional pré-preenchida.
 - Preservar composição, porção de referência, unidades, preparo, origem dos dados
   e incertezas disponíveis. Identificar referências genéricas e pendências; dado
   desconhecido não é zero. Não exigir todos os nutrientes para cadastrar.
+- Para produto identificado, guardar os valores legíveis da tabela nutricional
+  disponíveis, inclusive energia e demais nutrientes, mesmo quando não forem
+  exibidos na resposta. Preservar cada base declarada (porção, 100 g/100 ml ou
+  embalagem), quantidade, unidade e, quando disponíveis, número de porções e
+  percentuais de valor diário. Registrar marca, produto, variante e mercado quando
+  conhecidos, além da origem: rótulo fornecido, fabricante ou tabela consultada,
+  com link e data quando disponíveis. Não inventar campos ilegíveis ou ausentes.
+- Se outra foto ou fonte confiável completar a tabela da mesma referência,
+  acrescentar os dados identificados e sua origem, preservando os anteriores e
+  distinguindo bases diferentes. Em divergência ou reformulação, não sobrescrever
+  silenciosamente: conferir a identidade e aplicar as regras de correção ou nova
+  variante abaixo. A foto em si só é recuperável se sua gravação for confirmada;
+  dados transcritos não comprovam que o arquivo da imagem foi salvo.
 - Cadastrar uma referência não lança uma refeição. Registrar um consumo não
   exige criar outro cadastro. Pedidos de análise sem salvar não autorizam
   alimentar o cadastro; respeitar as autorizações do onboarding e da plataforma.
@@ -183,6 +196,8 @@ confirmado. Usuário: “Almocei a marmita.”
 | Novo nome igual ao apelido de outra versão, inclusive fora de uso habitual | Rejeitar a colisão; não reatribuir o apelido. |
 | Grafias próximas do fornecedor, com receitas diferentes | Localizar candidatos e esclarecer; não fundir automaticamente. |
 | Nova banana genérica sem variedade conhecida | Usar referência genérica sustentada, com origem e porção estimadas; não inventar variedade nem exigir perfil completo. |
+| Produto com tabela legível, numa rotina de gravação autorizada | Guardar valores disponíveis, unidades, bases e origem no cadastro, inclusive nutrientes não exibidos; separar os valores escalados no diário. |
+| Nova foto completa a tabela do mesmo produto | Acrescentar os campos comprovados e sua origem, sem duplicar cadastro ou consumo; preservar o histórico e tratar eventual reformulação como nova referência. |
 | “Comi metade da marmita habitual” | Reutilizar a versão identificada, escalando somente o consumo. |
 | “Só hoje troquei o arroz por purê” | Ajustar esse consumo; manter a receita e o padrão habituais. |
 | “Agora minha marmita leva purê” sem clareza sobre recorrência | Perguntar se é pontual ou novo padrão antes de alterar o cadastro habitual. |

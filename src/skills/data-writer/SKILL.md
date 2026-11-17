@@ -101,6 +101,10 @@ Preservar a identidade estável do cadastro, a composição anterior, os víncul
 os valores dos consumos passados. Uma nova receita habitual cria outra identidade
 e nome; consumo de outra quantidade reutiliza a referência identificada. Mapear
 esses dados à estrutura encontrada, acrescentando somente os campos necessários.
+Na rotina autorizada, guardar no cadastro os valores disponíveis da tabela do
+produto, suas bases, unidades e origem conforme meal-registry, inclusive nutrientes
+não exibidos na resposta. No diário, guardar os valores referentes à quantidade
+consumida; não confundir esses valores com a tabela da porção de referência.
 Devolver separadamente a confirmação do cadastro, da preferência habitual quando
 solicitada e do consumo; repetir a operação não cria outra versão.
 

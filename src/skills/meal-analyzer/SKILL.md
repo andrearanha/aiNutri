@@ -112,17 +112,34 @@ frente da embalagem pode indicar outro nutriente, não calorias.
 
 ## 3. Escolher fontes e calcular
 
-Priorizar a referência que melhor corresponde ao alimento e ao preparo:
+Antes de inferir calorias ou nutrientes somente pela aparência ou por conhecimento
+geral, buscar uma base confiável nesta ordem, para cada item pertinente:
 
-1. Rótulo legível do produto consumido ou informação oficial do fabricante
-   para a mesma variante e porção.
-2. Receita ou cadastro do próprio usuário com origem e quantidades conhecidas,
-   ainda compatível com a refeição atual.
-3. Tabelas de composição adequadas ao alimento: [TBCA](https://www.tbca.net.br/)
-   para alimentos e preparações brasileiras e [USDA FoodData Central](https://fdc.nal.usda.gov/)
-   quando pertinente. Conferir parte comestível, estado de preparo e unidade.
-4. Preparação semelhante ou conhecimento nutricional geral, identificados
-   como aproximação quando não houver referência mais específica.
+1. **Tabela nutricional fornecida pelo usuário:** usar o rótulo legível da
+   embalagem consumida. Se não estiver disponível, sugerir uma foto da tabela e
+   também da embalagem para identificar e registrar o produto, quando possível.
+   Para prato caseiro sem embalagem ou tabela aplicável, seguir à próxima etapa.
+2. **Histórico do usuário:** consultar os registros e o cadastro pertinentes,
+   incluindo receita ou produto com origem conhecida, compatíveis com o item,
+   variante, preparo e período. Uma estimativa anterior sem base confiável não
+   se torna dado documentado por estar salva.
+3. **Fabricante ou fornecedor:** pesquisar a tabela oficial do produto identificado,
+   quando aplicável e houver pesquisa disponível.
+4. **Fontes oficiais de composição:** consultar tabelas adequadas, como
+   [TBCA](https://www.tbca.net.br/), [TACO](https://nepa.unicamp.br/categoria/taco/)
+   ou [USDA FoodData Central](https://fdc.nal.usda.gov/), conforme o alimento
+   e o contexto. Conferir parte comestível, preparo, porção e unidade.
+
+Parar quando uma fonte confiável e compatível fornecer os dados necessários;
+não pesquisar as etapas seguintes por rotina. Quando a fonte cobrir apenas
+parte dos nutrientes, buscar os dados faltantes relevantes sem misturar produtos
+ou formulações. Sugerir as fotos sem esperar pela resposta para consultar as
+demais fontes disponíveis; não insistir nem bloquear a análise ou o registro.
+Se uma etapa não se aplicar ou estiver indisponível, seguir à próxima e informar
+limitações relevantes. Somente depois dessas tentativas possíveis, usar uma
+preparação semelhante ou conhecimento geral como aproximação fundamentada; sem
+base defensável, manter o dado pendente. Distinguir dados de composição obtidos
+das fontes da porção visualmente estimada: uma tabela não mede a porção da foto.
 
 Fontes confiáveis, em lista não exaustiva, conforme a finalidade:
 
@@ -140,8 +157,7 @@ Fontes confiáveis, em lista não exaustiva, conforme a finalidade:
   do produto identificado, quando publicados para a mesma variante e mercado.
 
 Quando a marca e o produto forem conhecidos pelo nome ou identificáveis na foto,
-pesquisar a informação oficial do fabricante se houver ferramenta disponível e
-for necessário verificar ou completar dados relevantes. Conferir variante,
+pesquisar a informação oficial do fabricante na etapa acima. Conferir variante,
 sabor, país, porção e eventual mudança de formulação; uma marca sozinha não
 identifica o produto. Priorizar o rótulo legível da embalagem consumida diante
 de divergência com uma página que possa refletir outra formulação; sinalizar a
@@ -211,6 +227,9 @@ Fornecer ao fluxo do aiNutri, em linguagem ou estrutura suportada pela plataform
   cadastro, com porção-base, preparo, origem e pendências disponíveis. Informar
   se o relato confirma uma nova receita habitual ou apenas altera este consumo;
   não inventar identidade persistida nem afirmar que o cadastro foi gravado.
+- Para produto identificado, repassar também os valores legíveis disponíveis da
+  tabela nutricional e suas bases e unidades, mesmo quando não exibidos ao
+  usuário, para possível reutilização conforme as regras de meal-registry.
 
 Essas informações são um contrato de conteúdo, não um novo modelo de arquivo.
 Não exigir JSON, execução de código ou nomes específicos de ferramentas.
@@ -256,8 +275,9 @@ casos ambíguos. Os números dos exemplos são fictícios, não uma tabela nutri
   visão, pesquisa, contexto e conectores efetivamente disponíveis.
 - Se não conseguir acessar a imagem, dizer isso e pedir uma descrição simples;
   não fingir inspeção visual nem exigir terminal ou configuração técnica.
-- Sem pesquisa, usar uma aproximação genérica quando defensável, identificando
-  a base. Não inventar consulta, URL ou citação. Mostrar a fonte de forma compacta
+- Sem pesquisa ou acesso ao histórico, seguir as etapas disponíveis e usar uma
+  aproximação genérica somente quando defensável, identificando a base e a
+  limitação. Não inventar consulta, URL ou citação. Mostrar a fonte de forma compacta
   quando pesquisada ou importante para diferenciar dado documentado de estimativa.
 - Não enviar fotos, dados clínicos ou histórico identificável a serviços de
   reconhecimento/pesquisa externos sem autorização específica. Preferir consultas

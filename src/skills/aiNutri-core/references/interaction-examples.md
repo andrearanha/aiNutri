@@ -4,11 +4,11 @@ Consulte os casos pertinentes ao tipo de interação. Estes exemplos usam dados 
 
 ## 1. Registrar e reunir os resultados
 
-**Contexto:** nova conversa, pasta configurada e registro autorizado. O perfil informa preferência por respostas curtas. A leitura de `meal-log.gsheet` confirma 600 kcal e 30 g de proteínas já registrados em 14/09; o plano vigente em `clinical/` informa meta diária de 2.000 kcal, mínimo diário de 100 g de proteínas e prevê uma fonte proteica no lanche da tarde, próxima refeição no momento da resposta. A análise da refeição retorna 400 kcal e 40 g de proteínas estimadas, e a avaliação retorna 🟢 Bom. A ferramenta confirma a gravação.
+**Contexto:** nova conversa, pasta configurada e registro autorizado. O perfil informa preferência por respostas curtas. A leitura de `meal-log.gsheet` confirma 600 kcal e 30 g de proteínas já registrados em 14/09; o plano vigente em `clinical/` informa meta diária de 2.000 kcal, mínimo diário de 100 g de proteínas e prevê uma fonte proteica no lanche da tarde, próxima refeição no momento da resposta. A análise da refeição retorna 400 kcal e 40 g de proteínas estimadas, e as avaliações da refeição e da parcial retornam separadamente 🟢 Bom. A ferramenta confirma a gravação.
 
 **Usuário:** “Almocei arroz, feijão e frango hoje às 12h. Segue a foto.”
 
-**Condução:** ao invocar o plugin, recuperar os registros do dia e o plano no Drive, analisar a foto, inferir calorias e nutrientes, avaliar a refeição e, por fim, salvar e conferir a operação. Não repetir o onboarding nem exigir um pedido separado de avaliação. Os valores abaixo vêm dessa análise fictícia.
+**Condução:** ao invocar o plugin, recuperar os registros do dia e o plano no Drive, analisar a foto e buscar referências conforme a ordem da meal-analyzer antes de estimar calorias e nutrientes, avaliar a refeição e, por fim, salvar e conferir a operação. Não repetir o onboarding nem exigir um pedido separado de avaliação. Os valores abaixo vêm dessa análise fictícia.
 
 **Resposta possível:**
 
@@ -24,6 +24,10 @@ Consulte os casos pertinentes ao tipo de interação. Estes exemplos usam dados 
 > 🟢 **Bom** — Refeição alinhada ao plano informado.
 >
 > **Parcial do dia:** ~1.000 kcal · Meta: 2.000 kcal · Saldo: ~1.000 kcal.
+>
+> 🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜
+>
+> 🟢 **Bom — parcial do dia**.
 >
 > **Proteínas:** ~70 g · Faltam ~30 g para o mínimo diário.
 >
@@ -67,9 +71,12 @@ Essa orientação depende do plano disponível; não estabelecer uma porção pr
 > **Jantar atualizado:** ~450 kcal.
 > **Parcial do dia:** ~1.600 kcal · Meta: 2.000 kcal · Saldo: ~400 kcal.
 >
+> ◼◼◼◼◼◼◼◼◻◻
+>
 > As porções continuam estimadas. O jantar segue em andamento.
 
-Se couber reavaliação, apresentar a nota retornada pela skill junto do resultado.
+Se couber reavaliação, apresentar a nota retornada pela skill junto do resultado;
+usar o farol da parcial na barra apenas quando essa avaliação estiver disponível.
 
 ## 4. Dúvida sobre qual registro corrigir
 
@@ -104,7 +111,10 @@ no fuso conhecido do usuário. A análise e a gravação ocorrem apenas em 16/09
 
 > **Parcial conhecida:** ~900 kcal, ainda sem as calorias do suplemento de fibras. O saldo final depende dessa informação.
 
-O pedido de uma foto do rótulo só é necessário se a informação não puder ser obtida nas fontes já disponíveis.
+Se o suplemento for embalado e a tabela ainda não tiver sido fornecida, sugerir
+fotos da tabela nutricional e da embalagem, quando possível. Consultar também as
+outras fontes disponíveis sem esperar a resposta; se as fotos chegarem depois,
+completar o registro existente com os dados comprovados, sem duplicar o consumo.
 
 ## 7. Hábito e consumo do dia
 
