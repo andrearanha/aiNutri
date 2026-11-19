@@ -1,0 +1,39 @@
+FIBRAS INSOLÚVEIS — REFERÊNCIA INTERNA
+
+Lista ampla, não exaustiva, de alimentos e partes que podem fornecer fibras
+insolúveis. Muitos contêm também fibras solúveis: a proporção varia com a
+variedade, a parte consumida e o processamento. A presença na lista não prova
+predominância para toda variedade nem informa quantidade ou valor energético.
+Não presumir composição, desconto calórico ou ausência de energia do alimento.
+Consultar fonte compatível quando forem necessários dados quantitativos.
+
+Grãos integrais e farelos: farelo de trigo, trigo integral, farinha integral,
+pão e massa integrais, arroz integral, milho integral, pipoca, centeio integral,
+cevada integral, quinoa, aveia integral e farelo de aveia.
+
+Sementes e oleaginosas: linhaça, chia, sementes de girassol, abóbora e gergelim;
+amêndoas com pele, nozes, castanhas, avelãs, amendoim e pistache. Chia, linhaça
+e aveia também podem contribuir com fibras solúveis relevantes.
+
+Vegetais: couve, espinafre, rúcula, alface, acelga, brócolis, couve-flor,
+repolho, couve-de-bruxelas, vagem, salsão, abobrinha, cenoura, beterraba,
+batata inglesa e batata-doce. Cascas e talos comestíveis podem contribuir;
+considerar somente as partes efetivamente consumidas.
+
+Frutas: maçã, pera, ameixa e uva com casca; morango, amora, framboesa, kiwi,
+goiaba, figo e maracujá com sementes comestíveis, quando consumidas. A polpa
+e outras partes também podem conter fibras solúveis.
+
+Leguminosas: feijões, lentilha, grão-de-bico, ervilha e soja, inclusive suas
+cascas comestíveis. Contêm ambos os tipos; não inferir proporção individual.
+
+Base técnica sobre energia e limites da classificação por solubilidade:
+FAO, Food energy — methods of analysis and conversion factors, capítulos 2 e 3:
+https://www.fao.org/4/Y5022E/y5022e03.htm
+https://www.fao.org/4/Y5022E/y5022e04.htm
+
+Fontes para interpretar cálculo e composição:
+Anvisa, IN nº 75/2020, Anexo XXII (fatores para rotulagem):
+https://bvsms.saude.gov.br/bvs/saudelegis/anvisa/2020/IN%2075_2020_.pdf
+USDA, documentação de Foundation Foods (carboidratos e energia):
+https://fdc.nal.usda.gov/Foundation_Foods_Documentation/

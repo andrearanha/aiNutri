@@ -47,9 +47,9 @@ aponta para a mesma refeição. Correção mantém o ID do item afetado.
 | consumo_id | Texto, identidade estável do consumo. |
 | refeicao_id | Texto, vínculo obrigatório com `Refeicoes`. |
 | data_consumo | Data local do consumo, obrigatória para registro no diário. |
-| hora_consumo | Hora local ou expressão aproximada; vazia se desconhecida após pergunta. |
-| precisao_temporal | Texto: `informado`, `aproximado`, `resolvido_relativo`, `inferido_confirmado` ou `pendente`; registrar também aproximação de expressão relativa em origem_temporal. |
-| origem_temporal | Texto: relato, expressão relativa ou inferência confirmada e referência confiável usada, com limitações; não exige timestamp da mensagem. |
+| hora_consumo | Hora local ou expressão aproximada; vazia se desconhecida. |
+| precisao_temporal | Texto: `informado`, `aproximado`, `resolvido_relativo`, `inferido`, `inferido_confirmado` ou `pendente`; registrar também aproximação de expressão relativa em origem_temporal. |
+| origem_temporal | Texto: relato, expressão relativa ou inferência e referência confiável usada, com limitações e eventual confirmação; não exige timestamp da mensagem. |
 | fuso | Texto, IANA ou offset quando disponível e necessário. |
 | alimento | Texto, descrição identificada; distinguir descrição inferida. |
 | preparo | Texto, preparo conhecido ou estimado. |

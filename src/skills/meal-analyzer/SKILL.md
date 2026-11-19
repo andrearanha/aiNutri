@@ -182,6 +182,31 @@ produtos diferentes para aparentar um rótulo completo.
 - Preferir energia declarada no rótulo/tabela a uma reconstrução simplificada
   pelos macros; não forçar igualdade ignorando fibras, outros componentes e
   arredondamentos. Discrepância importante pede conferência de unidade ou fonte.
+- Na ausência de valor energético de fonte compatível, ao estimar pelos
+  componentes, não adicionar kcal separadas para a fibra insolúvel. Se os
+  carboidratos informados incluírem fibras, não aplicar 4 kcal/g à fibra
+  insolúvel como se fosse carboidrato disponível; não subtrair fibras novamente
+  de carboidratos já declarados como disponíveis. Não presumir a quantidade de
+  fibra insolúvel a partir do alimento ou de fibras totais: se a distinção for
+  necessária e desconhecida, manter a incerteza ou o valor pendente.
+- Em alimentos inteiros, considerar normalmente a energia dos demais
+  componentes estimáveis, como amido, proteínas e gorduras; a regra da fibra
+  insolúvel não torna o alimento isento de calorias. A fibra solúvel não deve
+  ser automaticamente tratada como insolúvel: quando conhecida, usar o fator
+  adequado ao método e à fonte, sem duplicar sua contribuição.
+- Conferir a definição de carboidratos da fonte antes de calcular. No USDA
+  FoodData Central, carboidratos calculados por diferença incluem fibras;
+  carboidratos totais menos fibras pode aproximar a fração disponível, mas não
+  representa sozinho toda a energia das fibras nem substitui o valor energético
+  informado. Não subtrair fibras por padrão apenas por a fonte ser estrangeira.
+- A energia de rótulo ou tabela pode incorporar fibras conforme o método da
+  fonte. Escalá-la pela porção, sem acrescentar ou descontar novamente calorias
+  de fibras. Fibras insolúveis não são digeridas pelas enzimas humanas, mas podem
+  ser parcialmente fermentadas; não afirmar que passam sempre intactas ou que
+  sua contribuição energética é universalmente nula. Esta regra operacional de
+  estimativa é interna: não explicá-la ao usuário por iniciativa própria.
+  Consultar a [lista interna de alimentos](references/fibras-insoluveis.txt)
+  como orientação qualitativa, nunca como tabela de composição ou fator calórico.
 - Manter coerência entre itens e totais. Para inferências visuais, arredondar
   calorias geralmente a 5 ou 10 kcal e macros a gramas inteiros, sem falsa precisão.
   Preservar dados documentados quando a precisão for útil.

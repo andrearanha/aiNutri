@@ -19,8 +19,8 @@ não comprova quando um alimento foi consumido.
 - Se a plataforma não fornecer o timestamp ou o fuso necessário, mantenha
   essa limitação explícita. Não invente metadados nem use o relógio atual como
   se fosse o horário da mensagem. Aproveite datas e horários informados pelo
-  usuário e pergunte somente a data ou o horário aproximado que ainda faltarem
-  para cada consumo confirmado.
+  usuário; pergunte apenas quando a informação ausente for necessária para
+  identificar o dia ou resolver uma contradição relevante. A hora pode ficar pendente.
 
 ## Momento do consumo
 
@@ -35,18 +35,17 @@ Esses momentos podem pertencer a dias diferentes.
    dia, mês e ano. Não recalcule essas expressões pelo momento de uma releitura.
 3. Quando não houver horário, intervalo relativo ou “agora” informado para o
    consumo, use o timestamp confiável da mensagem original e o fuso disponível
-   para propor um horário local aproximado, como hipótese, e peça confirmação:
-   “Foi por volta das 12h?”. Se a data também for incerta, inclua-a na
-   confirmação; não presuma que o consumo ocorreu no dia da mensagem.
-   Respeite a data informada para consumo retroativo;
-   o horário da mensagem é apenas sugestão, não prova do consumo. Se houver
-   vários consumos, confirme cada momento distinto, agrupando a pergunta quando
-   fizer sentido. Não repita referência temporal já informada ou resolvida.
-   Se não houver referência confiável para inferir, pergunte data e horário
-   aproximados que faltarem. Não use o relógio da ferramenta como substituto.
-   Se o usuário corrigir a hipótese, use sua resposta; se confirmar, preserve
-   o caráter aproximado e a origem inferida e confirmada. Se disser que não sabe,
-   mantenha a hora pendente. Não trate falta de resposta como confirmação.
+   para inferir consumo recente, aproximadamente no horário local da mensagem,
+   sem pedir confirmação. Registre a aproximação e sua origem inferida, sem
+   apresentá-la como horário informado. Se houver indício de relato retroativo,
+   preserve a data informada e não copie o horário da mensagem para outro dia;
+   deixe a hora desconhecida quando não houver outra referência para ela.
+   Com vários consumos, considere o contexto de cada um; não atribua um mesmo
+   horário quando o relato indicar momentos distintos. Pergunte somente diante
+   de contradição ou ambiguidade relevante para o dia ou para uma decisão; não
+   confirme por rotina um horário plausível, inclusive se o consumo foi agora.
+   Sem referência confiável, mantenha a hora pendente; não use o relógio da
+   ferramenta como substituto. Se o usuário corrigir a inferência, use a correção.
    Sem dia identificável, não atribua o evento a um dia nem grave no diário até
    esclarecê-lo. A falta apenas de horário não impede o registro autorizado.
 4. Preserve a parte conhecida quando faltar precisão. Um horário sem data ou
@@ -82,5 +81,7 @@ Dados fictícios para revisão das decisões, sem exigir redação idêntica.
 | Timestamp em UTC, fuso do usuário desconhecido e conversão pode mudar o dia | Pedir o fuso ou a referência local necessária; não presumir São Paulo pelo idioma. |
 | Meia-noite, jantar ou pedido “feche ontem” | Os dois primeiros não fecham o dia; no pedido explícito, resolver “ontem” pelo timestamp da mensagem e fechar apenas esse período. |
 | Exame de 10/09 enviado em 15/09 | Preservar 10/09 como data do exame e 15/09 como referência do envio, sem substituir uma pela outra. |
-| Mensagem local às 12h: “Almocei arroz”, sem horário informado | Core pergunta “Foi por volta das 12h?”; só registra a hipótese temporal após confirmação. Se o usuário informar outro horário, usa o informado. Sem referência confiável, pergunta quando. |
-| “Almocei ontem”, mensagem às 12h | Preservar a data de ontem e confirmar a sugestão de horário, sem trocar a data pelo dia da mensagem. |
+| Mensagem local às 12h: “Almocei arroz”, sem horário informado | Registrar aproximadamente 12h, com origem inferida do timestamp, sem perguntar. Se corrigido, usar o horário informado. |
+| “Almocei ontem”, mensagem às 12h | Preservar a data de ontem; deixar a hora desconhecida, sem copiar 12h nem exigir confirmação. |
+| Relato de consumo recente, sem timestamp confiável, mas com dia conhecido | Registrar no dia conhecido com hora pendente, sem inventar horário nem perguntar apenas para preencher o campo. |
+| Relato contraditório que impede identificar o dia | Perguntar somente a referência necessária antes de registrar. |

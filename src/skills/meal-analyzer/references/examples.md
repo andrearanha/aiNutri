@@ -215,12 +215,18 @@ Não declarar compatibilidade validada para um host que não foi testado.
 | “Era metade” corrigindo um lançamento | Substitui a quantidade anterior e recalcula os totais disponíveis. |
 | Item desconhecido em refeição parcialmente analisável | Entrega subtotal, identifica exclusão e faz no máximo uma pergunta essencial naquele turno. |
 | Usuário responde “não sei” à pergunta | Mantém aproximação fundamentada ou pendência, sem insistir ou bloquear outros registros. |
-| “Há 30 minutos”, mensagem às 00h15 com fuso conhecido | Associa consumo aproximadamente às 23h45 do dia anterior. Sem horário de referência confiável, Core pergunta o horário aproximado e a data necessária. |
+| “Há 30 minutos”, mensagem às 00h15 com fuso conhecido | Associa consumo aproximadamente às 23h45 do dia anterior. Sem referência confiável, não calcula a hora; Core pergunta apenas o necessário para identificar o dia. |
 | Meta e registros do dia indisponíveis | Apresenta análise da refeição; não cria histórico, meta, saldo ou fechamento. |
 | Imagem inacessível | Explica a limitação e aceita descrição cotidiana, sem fingir visão. |
 | Pesquisa indisponível | Não inventa fonte consultada; usa aproximação identificada quando houver base. |
 | Produto embalado sem tabela fornecida | Sugere fotos da tabela e da embalagem, quando possível; consulta histórico, fabricante e fontes oficiais nessa ordem, sem esperar pela resposta e parando quando houver base confiável suficiente. |
 | Tabela legível e compatível fornecida | Usa os dados necessários e não pesquisa as etapas seguintes por rotina; escala pela porção consumida. |
+| Rótulo com 120 kcal por porção e 5 g de fibras | Usa 120 kcal para uma porção; não acrescenta nem desconta calorias pelas fibras. |
+| Sem tabela energética: 20 g de carboidratos totais, incluindo 5 g de fibra insolúvel conhecida, e componentes restantes estimáveis | Para os carboidratos, considera 15 g disponíveis (60 kcal), sem somar kcal para os 5 g de fibra insolúvel; calcula os demais componentes separadamente, sem duplicação. |
+| Sem tabela energética: carboidratos totais e fibras totais, sem fração insolúvel conhecida | Não supõe que todas as fibras sejam insolúveis nem inventa a fração; mantém a incerteza ou o valor pendente quando necessário. |
+| Alimento integral com amido, proteína, gordura e fibra insolúvel | Considera a energia dos demais componentes estimáveis; não zera as calorias do alimento. |
+| Fonte define carboidratos como disponíveis e também informa fibras | Não subtrai as fibras dos carboidratos disponíveis novamente nem altera a energia declarada. |
+| Fonte define carboidratos por diferença, incluindo fibras, e informa fibra solúvel | Se precisar reconstruir energia, distingue carboidratos disponíveis e fibra solúvel, usa método compatível e não conta fibras duas vezes. |
 | Histórico compatível e confiável disponível | Reutiliza a referência identificada; não pesquisa fabricante ou tabelas oficiais por rotina. Uma estimativa antiga sem base não basta como dado documentado. |
 | Produto identificado, sem rótulo ou histórico confiável, com pesquisa disponível | Procura a tabela oficial do fabricante e confere variante, mercado e porção; se não encontrar, consulta fonte oficial adequada. |
 | Foto de prato caseiro, sem tabela aplicável ou receita conhecida | Consulta fonte oficial compatível com cada alimento e preparo; estima separadamente as porções visuais. |

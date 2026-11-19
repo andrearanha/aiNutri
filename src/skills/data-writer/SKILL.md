@@ -32,7 +32,7 @@ Receber no formato suportado pela plataforma, sem exigir JSON ou código:
   ou atualização autorizada de perfil, cadastro ou documento; salvamento de relatório HTML.
 - Pasta e conta selecionadas, destinos conhecidos por ID/URL e autorização
   aplicável. Para criação inicial, receber o local autorizado pelo onboarding.
-- Dados a gravar: refeição, data do consumo, horário por consumo ou pendência após pergunta, itens,
+- Dados a gravar: refeição, data do consumo, horário por consumo ou pendência, itens,
   porções, kcal e demais informações pertinentes já fornecidas pela análise
   ou pela Core. Incluir origem, hipóteses e pendências disponíveis.
 - Contexto temporal: timestamp de envio da mensagem original, fuso/offset

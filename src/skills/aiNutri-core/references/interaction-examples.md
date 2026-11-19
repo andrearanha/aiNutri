@@ -14,14 +14,9 @@ Consulte os casos pertinentes ao tipo de interação. Estes exemplos usam dados 
 
 > 🍽️ **Almoço — 14/09**
 >
-> | Alimento | Porção estimada | Calorias | Proteínas |
-> | --- | --- | --- | --- |
-> | Arroz cozido | 100 g | ~130 kcal | ~3 g |
-> | Feijão cozido | 100 g | ~80 kcal | ~5 g |
-> | Frango grelhado | 115 g | ~190 kcal | ~32 g |
-> | **Total** | | **~400 kcal** | **~40 g** |
+> Arroz, feijão e frango · ~400 kcal.
 >
-> 🟢 **Bom** — Refeição alinhada ao plano informado.
+> 🟢 **Bom — refeição:** combina proteína do frango e fibras do feijão.
 >
 > **Parcial do dia:** ~1.000 kcal · Meta: 2.000 kcal · Saldo: ~1.000 kcal.
 >
@@ -29,19 +24,16 @@ Consulte os casos pertinentes ao tipo de interação. Estes exemplos usam dados 
 >
 > 🟢 **Bom — parcial do dia**.
 >
-> **Proteínas:** ~70 g · Faltam ~30 g para o mínimo diário.
->
 > Salvo no seu Drive.
->
-> **Próxima: lanche da tarde — mantenha a fonte de proteína do plano.**
 
 **Verificar:** o lembrete é opcional e cabe em uma linha. Sem próxima refeição identificável ou prioridade útil, omiti-lo sem perguntar. Se o almoço for registrado retroativamente após o jantar, não apresentar o lanche da tarde já passado como próximo. Em uma refeição ainda em andamento, aguardar sua conclusão.
 
 **Variações de concisão e acompanhamento:**
 
+- Não apresentar tabela com nutrientes ou explicações adicionais sem pedido; manter a análise interna e comunicar informações necessárias à segurança ou a uma decisão.
 - Com 105 g de proteínas e mínimo diário de 100 g, usar “**Proteínas:** ~105 g · Mínimo diário atingido.”, sem classificar os 5 g acima do mínimo como excesso.
-- Sem meta proteica disponível, mostrar apenas as proteínas conhecidas. Se houver item com proteína desconhecida, identificar a exclusão e não apresentar o valor restante como conferido.
-- Uma preferência por respostas curtas vale também no novo chat após leitura do perfil. Se o usuário pedir “Explique a nota em detalhes”, explicar o necessário naquele turno, preservando a preferência habitual.
+- Se for necessário mencionar proteínas sem meta disponível, mostrar apenas a quantidade conhecida. Se houver item com proteína desconhecida, identificar a exclusão e não apresentar o valor restante como conferido.
+- Uma preferência por respostas curtas vale também no novo chat após leitura do perfil, mas não omite o feedback breve, a barra e o saldo quando houver dados. Se o usuário pedir “Explique a nota em detalhes”, explicar o necessário naquele turno, preservando a preferência habitual.
 - Se a avaliação retornar “🟡 **Alerta leve** — Desvio pontual que merece atenção.”, preservar essa descrição na resposta. Ao salvar, o conceito continua `Alerta`; a qualificação integra a justificativa.
 
 ## 2. Intenção e pergunta na mesma mensagem
@@ -58,7 +50,7 @@ Essa orientação depende do plano disponível; não estabelecer uma porção pr
 
 ## 3. Complemento e correção de uma refeição
 
-**Contexto:** jantar de hoje identificado, em andamento, com frango estimado com pele. O histórico e as ferramentas estão acessíveis.
+**Contexto:** jantar de hoje identificado, em andamento, com frango estimado com pele. O histórico e as ferramentas estão acessíveis. A reavaliação do jantar retorna 🟢 Bom; a parcial não tem avaliação sustentada.
 
 **Usuário:** “Sem pele. E comi mais meio filé às 20h.”
 
@@ -69,6 +61,7 @@ Essa orientação depende do plano disponível; não estabelecer uma porção pr
 > Corrigi o frango para sem pele e acrescentei o meio filé ao jantar no Drive.
 >
 > **Jantar atualizado:** ~450 kcal.
+> 🟢 **Bom — jantar:** composição favorável ao plano.
 > **Parcial do dia:** ~1.600 kcal · Meta: 2.000 kcal · Saldo: ~400 kcal.
 >
 > ◼◼◼◼◼◼◼◼◻◻
@@ -224,19 +217,18 @@ nenhuma frase apresenta o consumo como persistido sem confirmação. Uma nota
 do almoço não deve parecer uma avaliação de todo o dia.
 
 
-## 14. Confirmar horário inferido
+## 14. Inferir horário sem confirmação
 
 **Contexto:** mensagem recebida às 12h no fuso local conhecido.
 
 **Usuário:** “Almocei hoje arroz e feijão.”
 
-**Core:** “Foi por volta das 12h?”
-
-Se confirmar, registrar o horário aproximado com origem inferida e confirmada;
-se corrigir, usar a resposta. Sem referência confiável, perguntar quando ocorreu;
-se não souber, manter a hora pendente. Sem dia identificável, esclarecer a data
-antes de registrar. Um horário, tempo relativo ou “agora” já informado e resolvido
-não exige essa confirmação. A ausência de resposta não confirma a hipótese.
+**Condução:** registrar aproximadamente às 12h, com origem inferida do timestamp,
+sem perguntar. Apresentar feedback breve, parcial, barra e saldo quando houver
+dados, com confirmação da gravação somente após a ferramenta confirmá-la. Se o
+usuário corrigir a hora, atualizar o registro. Sem referência confiável, deixar a
+hora pendente; sem dia identificável, esclarecer a data antes de registrar. Um
+consumo retroativo mantém sua data, sem receber a hora da mensagem por suposição.
 
 ## 15. Autorização inicial sem expor instruções internas
 
