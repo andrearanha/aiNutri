@@ -201,20 +201,49 @@ nem nota nutricional com confirmação da persistência.
 ## 13. Avaliação e situação do registro na mesma resposta
 
 **Contexto:** a análise e a avaliação do almoço foram concluídas; a nota
-da refeição é Bom. A tentativa de gravação falhou de forma conhecida, sem aplicação.
+da refeição é Bom. As alternativas seguras foram esgotadas; a gravação falhou
+sem aplicação e reconectar o Drive é uma ação conhecida que pode resolver.
 
 **Trecho possível da resposta:**
 
 > 🟢 **Bom — almoço:** refeição compatível com o plano.
 >
-> Analisei a refeição, mas não consegui salvar no seu log.
+> Não consegui registrar a refeição. Reconecte seu Google Drive para eu tentar novamente.
 
-**Variação:** se o retorno da escrita for incerto, usar "Não consegui confirmar
-se foi salvo no seu log". Conferir antes de repetir, conforme o fluxo existente.
+**Variação:** se o retorno da escrita for incerto, conferir antes de repetir.
+Se continuar incerto, dizer "Não consegui confirmar se a refeição foi registrada"
+e pedir uma ação somente se ela for conhecida e útil. Sem ação disponível,
+informar apenas a limitação funcional, sem especular sobre a causa.
 
 **Verificar:** o farol identifica a refeição e permanece útil apesar da falha;
 nenhuma frase apresenta o consumo como persistido sem confirmação. Uma nota
 do almoço não deve parecer uma avaliação de todo o dia.
+
+## 13A. Atualização de plano com formato alternativo
+
+**Contexto:** o usuário autorizou guardar um plano novo a partir de uma data.
+O conteúdo do PDF está legível, mas a primeira forma de transferir o arquivo
+não está disponível. Há criação e leitura de documento na pasta autorizada.
+
+**Condução:** tentar guardar o PDF original por outros meios disponíveis; guardar
+o conteúdo legível e as orientações relevantes em documento recuperável, com
+origem, vigência e eventuais omissões. Atualizar a referência ao plano ou criar
+um registro de continuidade na mesma pasta. Preservar o plano anterior e conferir
+o conteúdo e a referência. Não pedir que o usuário decida formato ou resolva a
+integração. Em novo chat, recuperar também a referência alternativa e aplicar o
+plano correto conforme a data; esclarecer conflitos de vigência relevantes.
+
+**Resposta possível**, quando o conteúdo necessário e a referência foram
+confirmados, mas o original não foi guardado:
+
+> Seu novo plano está salvo e será a referência a partir de 19/11. Guardei as
+> orientações lidas; o PDF original não foi salvo e as receitas não transcritas
+> não estão incluídas.
+
+**Verificar:** se conteúdo essencial ou referência não puder ser confirmado,
+não prometer continuidade; informar o limite funcional e pedir apenas uma ação
+realmente disponível. Nunca alegar falha ou causa sem evidência. Se o usuário
+exigir o PDF integral, uma transcrição não satisfaz esse pedido.
 
 
 ## 14. Inferir horário sem confirmação
@@ -236,6 +265,14 @@ consumo retroativo mantém sua data, sem receber a hora da mensagem por suposiç
 
 **Resposta possível:**
 
-> Posso guardar seus objetivos e o plano alimentar nessa pasta do seu Google Drive registrar as refeições que você relatar e guardar seus relatórios durante o acompanhamento?
+> Posso usar essa pasta para guardar e atualizar seus dados, refeições e relatórios durante o acompanhamento, até você mudar de ideia?
+>
+> Você também autoriza guardar e consultar os planos e exames que enviar para seu acompanhamento, sem perguntar a cada vez?
 
 **Verificar:** o pedido explica o que será salvo e para quê, incluindo o plano, sem citar skills, suas funções ou regras internas. Só confirmar o salvamento depois da gravação efetiva.
+
+**Em outro chat:** se as autorizações contínuas e a pasta estiverem confirmadas,
+registrar a refeição e guardar o plano enviado para acompanhamento sem pedir de
+novo. Se o usuário revogou a autorização clínica, respeitar a revogação; um
+pedido posterior explícito para salvar um documento autoriza apenas esse caso.
+Uma exigência de reconexão da plataforma não é suprida pelo registro de consentimento.

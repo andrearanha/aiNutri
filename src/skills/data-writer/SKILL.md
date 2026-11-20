@@ -44,8 +44,11 @@ Receber no formato suportado pela plataforma, sem exigir JSON ou código:
 Não interpretar perguntas, simulações ou intenções futuras como consumo.
 Respeitar pedidos para não salvar. Na rotina já autorizada, um novo relato ou
 uma correção não exige outra confirmação apenas para executar a gravação.
-Documentos clínicos, criação inicial e outras operações que exigem confirmação
-continuam sujeitos ao onboarding e às regras da plataforma.
+Documentos clínicos exigem autorização específica ou contínua comprovada para
+esse escopo; criação inicial e outras operações seguem o onboarding e as regras
+da plataforma. Registre os escopos de autorização e sua revogação quando a Core
+encaminhar essa atualização autorizada, sem credenciais ou alegação de que isso
+concede acesso técnico ao Drive.
 
 ## Contexto temporal da gravação
 
@@ -82,6 +85,13 @@ Em perfil e documentos, atualizar somente o conteúdo autorizado, preservando
 as demais informações e os originais clínicos. Um hábito pertence ao perfil;
 não o transformar em ingestão de hoje. Um cadastro de alimento reutilizável
 não é outro consumo e deve manter sua porção de referência e origem.
+
+### Alternativas para persistir informações e continuidade
+
+- Priorize o resultado autorizado e a recuperação futura dos dados, sem exigir um formato, arquivo ou operação específica. Use as ferramentas disponíveis para tentar alternativas seguras na mesma conta e pasta autorizadas; por exemplo, criar um documento nativo com o conteúdo legível quando a transferência do original não estiver disponível. Tente preservar também o original integral quando possível, sem presumir que uma alternativa é cópia fiel dele.
+- Para plano ou documento clínico, registre o máximo do conteúdo legível pertinente ao acompanhamento, com origem, datas e vigência conhecidas, orientações, porções, alternativas, condições e limitações. Não invente trechos ilegíveis nem transforme resumo em transcrição integral. Identifique o que ficou de fora e se o original foi efetivamente guardado.
+- Atualize a referência existente ao plano vigente quando possível. Se não for possível fazê-lo com segurança, crie na raiz da pasta aiNutri autorizada um documento identificado como `Atualização de plano - AAAA-MM-DD`, usando a data de vigência conhecida e diferenciando versões sem sobrescrever. Inclua identificação ou link do plano, vigência, data e origem da atualização e relação com a versão anterior; se a data for desconhecida, identifique-a como pendente sem inventá-la. Antes de criar, procure uma atualização correspondente para evitar duplicação. Não sobrescreva o plano anterior nem afirme que o perfil original foi alterado quando não foi. Verifique a gravação e a leitura do conteúdo e da referência; devolva à Core os limites confirmados.
+- Use alternativas também em outras operações quando preservarem o significado, a privacidade e a recuperação necessária. Não crie um diário paralelo para contornar limites do diário existente, nem use representação que quebre suas relações, integridade ou regras de correção. Para resultados incertos, verifique antes de repetir ou criar outro registro; siga os limites de tentativas abaixo.
 
 ### Relatórios de período
 
